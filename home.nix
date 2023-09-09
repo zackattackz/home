@@ -1,5 +1,6 @@
 let
 tmuxTerminal = "tmux-256color";
+homeDirectory = "/home/zaha";
 in
 { config, pkgs, ... }:
 
@@ -10,28 +11,25 @@ in
     extra-experimental-features = ["flakes" "nix-command"];
   };
 
+  nixpkgs.config.allowUnfreePredicate = (pkg: true);
+
   home.username = "zaha";
-  home.homeDirectory = "/home/zaha";
+  home.homeDirectory = homeDirectory;
 
   home.stateVersion = "23.05";
 
-  home.packages = [
-    # # Adds the 'hello' command to your environment. It prints a friendly
-    # # "Hello, world!" when run.
-    # pkgs.hello
-
-    # # It is sometimes useful to fine-tune packages, for example, by applying
-    # # overrides. You can do that directly here, just don't forget the
-    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-    # # fonts?
-    # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
-
-    # # You can also create simple shell scripts directly inside your
-    # # configuration. For example, this adds a command 'my-hello' to your
-    # # environment:
+  home.packages = with pkgs; [
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
+    i3lock-fancy-rapid
+    discord
+    steam
+    lutris
+    protonup-qt
+    vscode
+    gnome.seahorse
+    xclip
   ];
 
   # home.file = {
@@ -49,6 +47,19 @@ in
   home.sessionPath = [
     "$HOME/.local/bin"
   ];
+
+  xdg.userDirs = {
+    enable = true;
+    createDirectories = true;
+    desktop = null;
+    documents = "${homeDirectory}/documents";
+    download = "${homeDirectory}/downloads";
+    music = "${homeDirectory}/music";
+    pictures = "${homeDirectory}/pictures";
+    publicShare = null;
+    templates = null;
+    videos = "${homeDirectory}/videos";
+  };
 
   programs.home-manager.enable = true;
 
@@ -113,12 +124,15 @@ in
 
   programs.bash = {
     enable = true;
+    shellAliases = {
+        xclip = "xclip -sel clip";
+    };
     enableCompletion = true;
     historyControl = [ "ignoredups" ];
     historyIgnore = [ "exit" ];
     historySize = 50000;
     initExtra = ''
-      [[ -z "$TMUX" && $TERM != "${tmuxTerminal}" && "$TERM_PROGRAM" != "vscode" ]] && exec tmux
+      [[ -z "$TMUX" && $TERM != "${tmuxTerminal}" && $TERM != linux  && "$TERM_PROGRAM" != "vscode" ]] && exec tmux
       bind '"\C-k": history-search-backward'
       bind '"\C-j": history-search-forward'
       bind '"\C-p": "\C-M"'
@@ -130,5 +144,85 @@ in
     enableBashIntegration = true;
   };
 
+  programs.feh = {
+    enable = true;
+  };
+
+  programs.pywal = {
+    enable = true;
+  };
+
+  programs.rofi = {
+    enable = true;
+  };
+
+  programs.firefox = {
+    enable = true;
+  };
+
+  programs.alacritty = {
+    enable = true;
+    settings = {
+      font = {
+        normal = {
+          family = "Iosevka NFM";
+          style = "Regular";
+        };
+        bold = {
+          family = "Iosevka NFM";
+          style = "Boldr";
+        };
+        italic = {
+          family = "Iosevka NFM";
+          style = "Italic";
+        };
+        bold_italic = {
+          family = "Iosevka NFM";
+          style = "Bold Italic";
+        };
+        size = 15.0 ;
+      };
+    };
+  };
+
+  xsession ={
+    enable = true;
+    windowManager.bspwm = {
+      enable = true;
+      monitors = {
+        "DP-0" = [ "1" "2" "3" "4" "5"];
+      };
+    };
+  };
+
+  services.sxhkd = {
+    enable = true;
+    keybindings = {
+      "super + Return" = "alacritty";
+      "super + w" = "firefox";
+      "super + space" = "rofi -show drun";
+      "super + {_,shift + }q" = "bspc node -{c,k}";
+      "super + {1-9}" = "bspc desktop -f '^{1-9}'";
+      "super + shift + {1-9}" = "bspc node -d '^{1-9}'";
+    };
+  };
+
+  services.dunst = {
+    enable = true;
+
+  };
+
   services.gpg-agent.enable = true;
+
+  #services.screen-locker = {
+  #  enable = true;
+  #  xautolock = {
+  #    enable = false;
+  #  };
+  #  xsslock
+  #};
+  services.gnome-keyring = {
+    enable = true;
+  };
+
 }
