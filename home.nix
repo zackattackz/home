@@ -7,17 +7,17 @@ wallpaperPath = "${picturesPath}/wallpapers/aurora1.png";
 colorTheme = "nord";
 cursorName = "Nordzy-cursors";
 # Given a colorTheme, return set suitable for home.file
-colorThemeToFileAttrs = colorTheme:
-  builtins.listToAttrs
-    (builtins.map
+colorThemeToFileAttrs = with builtins; colorTheme:
+  listToAttrs
+    (map
       (fname: {
         name = ".cache/wal/${fname}";
 	value = {
 	  source = ./files/wal/${colorTheme}/${fname};
 	};
       })
-      (builtins.attrNames
-        (builtins.readDir ./files/wal/${colorTheme})));
+      (attrNames
+        (readDir ./files/wal/${colorTheme})));
 in
 {
   nix.package = pkgs.nix;
