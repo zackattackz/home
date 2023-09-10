@@ -4,6 +4,7 @@ tmuxTerminal = "tmux-256color";
 homeDirectory = "/home/zaha";
 picturesPath =  "${homeDirectory}/pictures";
 wallpaperPath = "${picturesPath}/wallpapers/aurora1.png";
+fontFamily = "Iosevka NFM";
 colorTheme = "nord";
 cursorName = "Nordzy-cursors";
 # Given a colorTheme, return set suitable for home.file
@@ -205,6 +206,7 @@ in
 
   programs.rofi = {
     enable = true;
+    font = "${fontFamily} 13";
   };
 
   programs.firefox = {
@@ -214,11 +216,7 @@ in
   programs.alacritty = {
     enable = true;
     settings = {
-      font =
-      let
-      fontFamily = "Iosevka NFM";
-      in
-      {
+      font = {
         normal = {
           family = fontFamily;
           style = "Regular";
