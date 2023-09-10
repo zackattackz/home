@@ -1,10 +1,24 @@
+{ config, pkgs, ... }:
 let
 tmuxTerminal = "tmux-256color";
 homeDirectory = "/home/zaha";
-wallpaperPath = "~/pictures/wallpapers/aurora1.png";
+picturesPath =  "${homeDirectory}/pictures";
+wallpaperPath = "${picturesPath}/wallpapers/aurora1.png";
+colorTheme = "nord";
+cursorName = "Nordzy-cursors";
+# Given a colorTheme, return set suitable for home.file
+colorThemeToFileAttrs = colorTheme:
+  builtins.listToAttrs
+    (builtins.map
+      (fname: {
+        name = ".cache/wal/${fname}";
+	value = {
+	  source = ./files/wal/${colorTheme}/${fname};
+	};
+      })
+      (builtins.attrNames
+        (builtins.readDir ./files/wal/${colorTheme})));
 in
-{ config, pkgs, ... }:
-
 {
   nix.package = pkgs.nix;
 
@@ -35,6 +49,7 @@ in
     noto-fonts
     noto-fonts-cjk
     noto-fonts-emoji
+    siji
     (nerdfonts.override { fonts = [
       "FiraCode"
       "Iosevka"
@@ -48,7 +63,8 @@ in
     ".local/bin/alacritty-keep-cwd".source = ./files/alacritty-keep-cwd;
     ".local/bin/bspc-node-move".source = ./files/bspc-node-move;
     ".local/bin/bspc-close-all-quit".source = ./files/bspc-close-all-quit;
-  };
+    
+  } // colorThemeToFileAttrs colorTheme;
 
   home.sessionVariables = {
     EDITOR = "nvim";
@@ -58,6 +74,8 @@ in
     "$HOME/.local/bin"
   ];
 
+  xdg.enable = true;
+
   xdg.userDirs = {
     enable = true;
     createDirectories = true;
@@ -65,10 +83,26 @@ in
     documents = "${homeDirectory}/documents";
     download = "${homeDirectory}/downloads";
     music = "${homeDirectory}/music";
-    pictures = "${homeDirectory}/pictures";
+    pictures = picturesPath;
     publicShare = null;
     templates = null;
     videos = "${homeDirectory}/videos";
+  };
+
+  home.pointerCursor = {
+    package = pkgs.nordzy-cursor-theme;
+    name = cursorName;
+    size = 16;
+    x11.enable = true;
+    gtk.enable = true;
+  };
+
+  gtk = {
+    enable = true;
+    cursorTheme = {
+       name = cursorName;
+       size = 16;
+    };
   };
 
   programs.home-manager.enable = true;
@@ -238,6 +272,24 @@ in
   services.dunst = {
     enable = true;
 
+  };
+
+  services.polybar = {
+    enable = true;
+    settings = {
+      "colors" = {
+        background = "\$\{xrdb:color0\}";
+        background-alt = "\$\{xrdb:color1\}";
+        foreground = "\$\{xrdb:color7\}";
+        foreground-alt = "\$\{xrdb:color8\}";
+        primary = "\$\{xrdb:color12\}";
+        secondary = "\$\{xrdb:color14\}";
+        alert = "\$\{xrdb:color11\}";
+      };
+    };
+    script = ''
+    polybar main &
+    '';
   };
 
   services.gpg-agent.enable = true;
