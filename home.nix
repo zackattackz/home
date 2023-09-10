@@ -1,6 +1,7 @@
 let
 tmuxTerminal = "tmux-256color";
 homeDirectory = "/home/zaha";
+wallpaperPath = "~/pictures/wallpapers/aurora1.png";
 in
 { config, pkgs, ... }:
 
@@ -30,15 +31,24 @@ in
     vscode
     gnome.seahorse
     xclip
+    xdotool
+    noto-fonts
+    noto-fonts-cjk
+    noto-fonts-emoji
+    (nerdfonts.override { fonts = [
+      "FiraCode"
+      "Iosevka"
+      "Hack"
+      "FantasqueSansMono"
+      "ProggyClean"
+    ]; })
   ];
 
-  # home.file = {
-    # ".examplerc".source = dotfiles/examplerc;
-
-    # ".examplerc".text = ''
-    #   exampleKey = exampleVal
-    # '';
-  # };
+  home.file = {
+    ".local/bin/alacritty-keep-cwd".source = ./files/alacritty-keep-cwd;
+    ".local/bin/bspc-node-move".source = ./files/bspc-node-move;
+    ".local/bin/bspc-close-all-quit".source = ./files/bspc-close-all-quit;
+  };
 
   home.sessionVariables = {
     EDITOR = "nvim";
@@ -92,6 +102,12 @@ in
     viAlias = true;
     vimAlias = true;
     vimdiffAlias = true;
+    plugins = with pkgs.vimPlugins; [
+      pywal-nvim
+    ];
+    extraConfig = ''
+    colorscheme pywal
+    '';
   };
 
   programs.git = {
@@ -132,10 +148,11 @@ in
     historyIgnore = [ "exit" ];
     historySize = 50000;
     initExtra = ''
-      [[ -z "$TMUX" && $TERM != "${tmuxTerminal}" && $TERM != linux  && "$TERM_PROGRAM" != "vscode" ]] && exec tmux
+      #[[ -z "$TMUX" && $TERM != "${tmuxTerminal}" && $TERM != linux  && "$TERM_PROGRAM" != "vscode" ]] && exec tmux
       bind '"\C-k": history-search-backward'
       bind '"\C-j": history-search-forward'
       bind '"\C-p": "\C-M"'
+      cat ~/.cache/wal/sequences
     '';
   };
 
@@ -163,24 +180,28 @@ in
   programs.alacritty = {
     enable = true;
     settings = {
-      font = {
+      font =
+      let
+      fontFamily = "Iosevka NFM";
+      in
+      {
         normal = {
-          family = "Iosevka NFM";
+          family = fontFamily;
           style = "Regular";
         };
         bold = {
-          family = "Iosevka NFM";
+          family = fontFamily;
           style = "Boldr";
         };
         italic = {
-          family = "Iosevka NFM";
+          family = fontFamily;
           style = "Italic";
         };
         bold_italic = {
-          family = "Iosevka NFM";
+          family = fontFamily;
           style = "Bold Italic";
         };
-        size = 15.0 ;
+        size = 13.0 ;
       };
     };
   };
@@ -192,18 +213,25 @@ in
       monitors = {
         "DP-0" = [ "1" "2" "3" "4" "5"];
       };
+      extraConfig = ''
+      feh --no-fehbg --bg-center ${wallpaperPath}
+      '';
     };
   };
 
   services.sxhkd = {
     enable = true;
     keybindings = {
-      "super + Return" = "alacritty";
+      "super + Return" = "alacritty-keep-cwd";
       "super + w" = "firefox";
       "super + space" = "rofi -show drun";
-      "super + {_,shift + }q" = "bspc node -{c,k}";
+      "super + {_,shift + } q" = "bspc node -{c,k}";
       "super + {1-9}" = "bspc desktop -f '^{1-9}'";
       "super + shift + {1-9}" = "bspc node -d '^{1-9}'";
+      "alt + {_,shift + } Tab" = "bspc desktop -f {next,prev}";
+      "super + {j,k}" = "bspc node -f {south,north}";
+      "super + {h,l}" = "bspc-node-move {west,east}";
+      "super + shift + control + q" = "bspc-close-all-quit";
     };
   };
 
