@@ -64,6 +64,7 @@ in
     ".local/bin/alacritty-keep-cwd".source = ./files/alacritty-keep-cwd;
     ".local/bin/bspc-node-move".source = ./files/bspc-node-move;
     ".local/bin/bspc-close-all-quit".source = ./files/bspc-close-all-quit;
+    ".local/bin/sss".source = ./files/sss;
     
   } // colorThemeToFileAttrs colorTheme;
 
