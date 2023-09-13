@@ -1,26 +1,19 @@
-{ config, pkgs, ... }:
+{ config, pkgs, nix-colors, ... }:
 let
 tmuxTerminal = "tmux-256color";
 homeDirectory = "/home/zaha";
 picturesPath =  "${homeDirectory}/pictures";
 wallpaperPath = "${picturesPath}/wallpapers/aurora1.png";
 fontFamily = "Iosevka NFM";
-colorTheme = "nord";
 cursorName = "Nordzy-cursors";
-# Given a colorTheme, return set suitable for home.file
-colorThemeToFileAttrs = with builtins; colorTheme:
-  listToAttrs
-    (map
-      (fname: {
-        name = ".cache/wal/${fname}";
-	value = {
-	  source = ./files/wal/${colorTheme}/${fname};
-	};
-      })
-      (attrNames
-        (readDir ./files/wal/${colorTheme})));
 in
 {
+  imports = [
+    nix-colors.homeManagerModules.default
+  ];
+
+  colorScheme = nix-colors.colorSchemes.nord;
+
   nix.package = pkgs.nix;
 
   nix.settings = {
@@ -66,7 +59,7 @@ in
     ".local/bin/bspc-close-all-quit".source = ./files/bspc-close-all-quit;
     ".local/bin/sss".source = ./files/sss;
     
-  } // colorThemeToFileAttrs colorTheme;
+  };
 
   home.sessionVariables = {
     EDITOR = "nvim";
@@ -138,12 +131,6 @@ in
     viAlias = true;
     vimAlias = true;
     vimdiffAlias = true;
-    plugins = with pkgs.vimPlugins; [
-      pywal-nvim
-    ];
-    extraConfig = ''
-    colorscheme pywal
-    '';
   };
 
   programs.git = {
@@ -188,7 +175,6 @@ in
       bind '"\C-k": history-search-backward'
       bind '"\C-j": history-search-forward'
       bind '"\C-p": "\C-M"'
-      cat ~/.cache/wal/sequences
     '';
   };
 
@@ -198,10 +184,6 @@ in
   };
 
   programs.feh = {
-    enable = true;
-  };
-
-  programs.pywal = {
     enable = true;
   };
 
@@ -235,6 +217,32 @@ in
           style = "Bold Italic";
         };
         size = 13.0 ;
+      };
+      colors = {
+        primary = {
+          background = "#${config.colorScheme.colors.base00}";
+	  foreground = "#${config.colorScheme.colors.base04}";
+	};
+	normal = {
+          black = "#${config.colorScheme.colors.base01}";
+          red = "#${config.colorScheme.colors.base08}";
+          green = "#${config.colorScheme.colors.base0B}";
+          yellow = "#${config.colorScheme.colors.base0A}";
+          blue = "#${config.colorScheme.colors.base0D}";
+          magenta = "#${config.colorScheme.colors.base0E}";
+          cyan = "#${config.colorScheme.colors.base0C}";
+          white = "#${config.colorScheme.colors.base05}";
+	};
+	bright = {
+          black = "#${config.colorScheme.colors.base03}";
+          red = "#${config.colorScheme.colors.base08}";
+          green = "#${config.colorScheme.colors.base0B}";
+          yellow = "#${config.colorScheme.colors.base0A}";
+          blue = "#${config.colorScheme.colors.base0D}";
+          magenta = "#${config.colorScheme.colors.base0E}";
+          cyan = "#${config.colorScheme.colors.base07}";
+          white = "#${config.colorScheme.colors.base06}";
+	};
       };
     };
   };
