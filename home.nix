@@ -38,6 +38,7 @@ in
     protonup-qt
     vscode
     gnome.seahorse
+    gnumake
     xclip
     xdotool
     noto-fonts
