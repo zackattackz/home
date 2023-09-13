@@ -8,13 +8,14 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nix-colors.url = "github:misterio77/nix-colors";
   };
 
-  outputs = { nixpkgs, home-manager, nix-colors, ... }:
+  outputs = { nixpkgs, home-manager, ... }:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
+      colorScheme = "nord";
+      colors = import ./colors/${colorScheme}.nix;
     in {
       homeConfigurations."zaha" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
@@ -25,7 +26,7 @@
 
         # Optionally use extraSpecialArgs
         # to pass through arguments to home.nix
-	extraSpecialArgs = { inherit nix-colors; };
+	extraSpecialArgs = { inherit colors; };
       };
       nixosConfigurations."nyx" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";

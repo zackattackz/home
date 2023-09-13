@@ -1,4 +1,4 @@
-{ config, pkgs, nix-colors, ... }:
+{ config, pkgs, colors, ... }:
 let
 tmuxTerminal = "tmux-256color";
 homeDirectory = "/home/zaha";
@@ -8,12 +8,6 @@ fontFamily = "Iosevka NFM";
 cursorName = "Nordzy-cursors";
 in
 {
-  imports = [
-    nix-colors.homeManagerModules.default
-  ];
-
-  colorScheme = nix-colors.colorSchemes.nord;
-
   nix.package = pkgs.nix;
 
   nix.settings = {
@@ -221,28 +215,28 @@ in
       };
       colors = {
         primary = {
-          background = "#${config.colorScheme.colors.base00}";
-	  foreground = "#${config.colorScheme.colors.base04}";
+          background = "#${colors.base00}";
+	  foreground = "#${colors.base04}";
 	};
 	normal = {
-          black = "#${config.colorScheme.colors.base01}";
-          red = "#${config.colorScheme.colors.base08}";
-          green = "#${config.colorScheme.colors.base0B}";
-          yellow = "#${config.colorScheme.colors.base0A}";
-          blue = "#${config.colorScheme.colors.base0D}";
-          magenta = "#${config.colorScheme.colors.base0E}";
-          cyan = "#${config.colorScheme.colors.base0C}";
-          white = "#${config.colorScheme.colors.base05}";
+          black = "#${colors.base01}";
+          red = "#${colors.base08}";
+          green = "#${colors.base0B}";
+          yellow = "#${colors.base0A}";
+          blue = "#${colors.base0D}";
+          magenta = "#${colors.base0E}";
+          cyan = "#${colors.base0C}";
+          white = "#${colors.base05}";
 	};
 	bright = {
-          black = "#${config.colorScheme.colors.base03}";
-          red = "#${config.colorScheme.colors.base08}";
-          green = "#${config.colorScheme.colors.base0B}";
-          yellow = "#${config.colorScheme.colors.base0A}";
-          blue = "#${config.colorScheme.colors.base0D}";
-          magenta = "#${config.colorScheme.colors.base0E}";
-          cyan = "#${config.colorScheme.colors.base07}";
-          white = "#${config.colorScheme.colors.base06}";
+          black = "#${colors.base03}";
+          red = "#${colors.base08}";
+          green = "#${colors.base0B}";
+          yellow = "#${colors.base0A}";
+          blue = "#${colors.base0D}";
+          magenta = "#${colors.base0E}";
+          cyan = "#${colors.base07}";
+          white = "#${colors.base06}";
 	};
       };
     };
