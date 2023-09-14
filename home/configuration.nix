@@ -1,4 +1,4 @@
-{ config, pkgs, colors, ... }:
+inputs@{ config, pkgs, args, ... }:
 let
 tmuxTerminal = "tmux-256color";
 homeDirectory = "/home/zaha";
@@ -8,6 +8,11 @@ fontFamily = "Iosevka NFM";
 cursorName = "Nordzy-cursors";
 in
 {
+
+  imports = [
+      (import ./modules/themes/themes.nix (inputs // { args = args.themes; }) )
+    ];
+
   nix.package = pkgs.nix;
 
   nix.settings = {
@@ -212,32 +217,6 @@ in
           style = "Bold Italic";
         };
         size = 13.0 ;
-      };
-      colors = {
-        primary = {
-          background = "#${colors.base00}";
-	  foreground = "#${colors.base04}";
-	};
-	normal = {
-          black = "#${colors.base01}";
-          red = "#${colors.base08}";
-          green = "#${colors.base0B}";
-          yellow = "#${colors.base0A}";
-          blue = "#${colors.base0D}";
-          magenta = "#${colors.base0E}";
-          cyan = "#${colors.base0C}";
-          white = "#${colors.base05}";
-	};
-	bright = {
-          black = "#${colors.base03}";
-          red = "#${colors.base08}";
-          green = "#${colors.base0B}";
-          yellow = "#${colors.base0A}";
-          blue = "#${colors.base0D}";
-          magenta = "#${colors.base0E}";
-          cyan = "#${colors.base07}";
-          white = "#${colors.base06}";
-	};
       };
     };
   };

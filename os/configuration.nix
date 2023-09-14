@@ -2,12 +2,13 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+inputs@{ config, pkgs, args, ... }:
 
 {
   imports =
     [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
+      ./modules/hardware-configuration.nix
+      (import ./modules/nvidia.nix (inputs // { args = args.nvidia; }) )
     ];
 
   # Bootloader.
@@ -25,15 +26,7 @@
     driSupport32Bit = true;
   };
 
-  hardware.nvidia = {
-    modesetting.enable = true;
-    powerManagement.enable = true;
-    open = false;
-    nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-  };
-
-  networking.hostName = "nyx"; # Define your hostname.
+  networking.hostName = args.hostName; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -68,7 +61,6 @@
     displayManager.startx.enable = true;
     layout = "us";
     xkbVariant = "";
-    videoDrivers = [ "nvidia" ];
   };
 
   services.pipewire = {

@@ -14,23 +14,22 @@
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
-      colorScheme = "nord";
-      colors = import ./colors/${colorScheme}.nix;
     in {
       homeConfigurations."zaha" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
 
         # Specify your home configuration modules here, for example,
         # the path to your home.nix.
-        modules = [ ./home.nix ];
+        modules = [ ./home/configuration.nix ];
 
         # Optionally use extraSpecialArgs
         # to pass through arguments to home.nix
-	extraSpecialArgs = { inherit colors; };
+	extraSpecialArgs = { args = { themes.theme = "nord"; }; };
       };
       nixosConfigurations."nyx" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-	modules = [ ./configuration.nix ];
+	modules = [ ./os/configuration.nix ];
+	specialArgs = { args = { nvidia.enable = true; hostName = "nyx"; }; };
       };
     };
 }
