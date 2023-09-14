@@ -24,7 +24,7 @@
 
         # Optionally use extraSpecialArgs
         # to pass through arguments to home.nix
-	extraSpecialArgs = { args = { themes.theme = "nord"; }; };
+	extraSpecialArgs = { args = { themes.theme = "nord"; username = "zaha"; }; };
       };
       nixosConfigurations."nyx" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";

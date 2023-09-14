@@ -1,7 +1,7 @@
 inputs@{ config, pkgs, args, ... }:
 let
 tmuxTerminal = "tmux-256color";
-homeDirectory = "/home/zaha";
+homeDirectory = "/home/${args.username}";
 picturesPath =  "${homeDirectory}/pictures";
 wallpaperPath = "${picturesPath}/wallpapers/aurora1.png";
 fontFamily = "Iosevka NFM";
@@ -21,7 +21,7 @@ in
 
   nixpkgs.config.allowUnfreePredicate = (pkg: true);
 
-  home.username = "zaha";
+  home.username = args.username;
   home.homeDirectory = homeDirectory;
 
   home.stateVersion = "23.05";
