@@ -2,13 +2,14 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-inputs@{ config, pkgs, args, ... }:
+{ config, lib, pkgs, cfg, ... }:
 
 {
+
   imports =
     [ # Include the results of the hardware scan.
       ./modules/hardware-configuration.nix
-      (import ./modules/nvidia.nix (inputs // { args = args.nvidia; }) )
+      ./modules/nvidia.nix
     ];
 
   # Bootloader.
@@ -26,7 +27,9 @@ inputs@{ config, pkgs, args, ... }:
     driSupport32Bit = true;
   };
 
-  networking.hostName = args.hostName; # Define your hostname.
+  hardware.nvidia = cfg.hardware.nvidia;
+
+  networking.hostName = cfg.networking.hostName; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary

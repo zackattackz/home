@@ -24,12 +24,20 @@
 
         # Optionally use extraSpecialArgs
         # to pass through arguments to home.nix
-	extraSpecialArgs = { args = { themes.theme = "nord"; username = "zaha"; }; };
+	extraSpecialArgs = {
+	  cfg = {
+	    misc.themes = {
+	      enable = true;
+	      theme = "nord";
+	    };
+	    home.username = "zaha";
+	  };
+	};
       };
       nixosConfigurations."nyx" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
 	modules = [ ./os/configuration.nix ];
-	specialArgs = { args = { nvidia.enable = true; hostName = "nyx"; }; };
+	specialArgs = { cfg = { hardware.nvidia.enable = true; networking.hostName = "nyx"; }; };
       };
     };
 }

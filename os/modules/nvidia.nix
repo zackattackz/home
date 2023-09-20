@@ -1,19 +1,25 @@
-{ config, pkgs, args, ...}:
+{ config, lib, pkgs, ...}:
 
-if args.enable
-then
+with lib;
+
+let
+  cfg = config.hardware.nvidia;
+in
 {
-  hardware.nvidia = {
-    modesetting.enable = true;
-    powerManagement.enable = true;
-    open = false;
-    nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
+  options.hardware.nvidia = {
+    enable = mkEnableOption "enable/configure nvidia drivers";
   };
+  config = mkIf cfg.enable {
+    hardware.nvidia = {
+      modesetting.enable = true;
+      powerManagement.enable = true;
+      open = false;
+      nvidiaSettings = true;
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
+    };
 
-  services.xserver = {
-    videoDrivers = [ "nvidia" ];
+    services.xserver = {
+      videoDrivers = [ "nvidia" ];
+    };
   };
 }
-else
-{ }

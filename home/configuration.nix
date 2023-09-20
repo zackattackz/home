@@ -1,17 +1,17 @@
-inputs@{ config, pkgs, args, ... }:
+{ config, lib, pkgs, cfg, ... }:
 let
 tmuxTerminal = "tmux-256color";
-homeDirectory = "/home/${args.username}";
+homeDirectory = "/home/${cfg.home.username}";
 picturesPath =  "${homeDirectory}/pictures";
-wallpaperPath = "${picturesPath}/wallpapers/aurora1.png";
+wallpaper = "aurora1.png";
+wallpaperPath = "${picturesPath}/wallpapers/${wallpaper}";
 fontFamily = "Iosevka NFM";
 cursorName = "Nordzy-cursors";
 in
 {
-
   imports = [
-      (import ./modules/themes/themes.nix (inputs // { args = args.themes; }) )
-    ];
+    ./modules/themes/themes.nix
+  ];
 
   nix.package = pkgs.nix;
 
@@ -21,29 +21,30 @@ in
 
   nixpkgs.config.allowUnfreePredicate = (pkg: true);
 
-  home.username = args.username;
+  home.username = cfg.home.username;
   home.homeDirectory = homeDirectory;
 
   home.stateVersion = "23.05";
 
   home.packages = with pkgs; [
-    # (pkgs.writeShellScriptBin "my-hello" ''
-    #   echo "Hello, ${config.home.username}!"
-    # '')
-    i3lock-fancy-rapid
+    libnotify
+    betterlockscreen
     discord
     steam
     lutris
     protonup-qt
     vscode
+    scrot
     gnome.seahorse
     gnumake
     xclip
     xdotool
+    jq
     noto-fonts
     noto-fonts-cjk
     noto-fonts-emoji
     siji
+    ponymix
     (nerdfonts.override { fonts = [
       "FiraCode"
       "Iosevka"
@@ -53,12 +54,22 @@ in
     ]; })
   ];
 
-  home.file = {
+  home.file =
+  let
+  wallpaperRepoPath = ./files/wallpapers/${wallpaper};
+  in
+  {
     ".local/bin/alacritty-keep-cwd".source = ./files/alacritty-keep-cwd;
-    ".local/bin/bspc-node-move".source = ./files/bspc-node-move;
+    ".local/bin/bspc-node-focus".source = ./files/bspc-node-focus;
+    ".local/bin/bspc-node-swap".source = ./files/bspc-node-swap;
     ".local/bin/bspc-close-all-quit".source = ./files/bspc-close-all-quit;
+    ".local/bin/bspc-northsouth-focus".source = ./files/bspc-northsouth-focus;
+    ".local/bin/rofi-pulse-select".source = ./files/rofi-pulse-select;
     ".local/bin/sss".source = ./files/sss;
-    
+    ".local/bin/screenshot".source = ./files/screenshot;
+    "${wallpaperPath}".source = wallpaperRepoPath;
+    ".cache/betterlockscreen/current/lock_dim.png".source = wallpaperRepoPath;
+    ".cache/betterlockscreen/1-DP-0/dim.png".source = wallpaperRepoPath;
   };
 
   home.sessionVariables = {
@@ -82,6 +93,9 @@ in
     publicShare = null;
     templates = null;
     videos = "${homeDirectory}/videos";
+    extraConfig = {
+      "XDG_SCREENSHOTS_DIR" = "${picturesPath}/screenshots";
+    };
   };
 
   home.pointerCursor = {
@@ -99,6 +113,8 @@ in
        size = 16;
     };
   };
+
+  fonts.fontconfig.enable = true;
 
   programs.home-manager.enable = true;
 
@@ -131,6 +147,9 @@ in
     viAlias = true;
     vimAlias = true;
     vimdiffAlias = true;
+    extraConfig = ''
+      set autoindent expandtab tabstop=2 shiftwidth=2
+    '';
   };
 
   programs.git = {
@@ -190,6 +209,14 @@ in
   programs.rofi = {
     enable = true;
     font = "${fontFamily} 13";
+    extraConfig = {
+      kb-row-up = "Up,Control+k,ISO_Left_Tab";
+      kb-row-down = "Down,Control+j,Tab";
+      kb-accept-entry = "Control+p,Return,KP_Enter";
+      kb-remove-to-eol = "";
+      kb-element-next = "";
+      kb-element-prev = "";
+    };
   };
 
   programs.firefox = {
@@ -206,7 +233,7 @@ in
         };
         bold = {
           family = fontFamily;
-          style = "Boldr";
+          style = "Bold";
         };
         italic = {
           family = fontFamily;
@@ -228,6 +255,9 @@ in
       monitors = {
         "DP-0" = [ "1" "2" "3" "4" "5"];
       };
+      settings = {
+        border_width = 3;
+      };
       extraConfig = ''
       feh --no-fehbg --bg-center ${wallpaperPath}
       '';
@@ -240,36 +270,113 @@ in
       "super + Return" = "alacritty-keep-cwd";
       "super + w" = "firefox";
       "super + space" = "rofi -show drun";
+      "alt + Tab" = "rofi -show window";
       "super + {_,shift + } q" = "bspc node -{c,k}";
       "super + {1-9}" = "bspc desktop -f '^{1-9}'";
-      "super + shift + {1-9}" = "bspc node -d '^{1-9}'";
-      "alt + {_,shift + } Tab" = "bspc desktop -f {next,prev}";
-      "super + {j,k}" = "bspc node -f {south,north}";
-      "super + {h,l}" = "bspc-node-move {west,east}";
+      "super + shift + {1-9}" = "bspc node -d '^{1-9}' --follow";
+      "super + {j,k}" = "bspc-northsouth-focus {south,north}";
+      "super + {h,l}" = "bspc-node-focus {west,east}";
+      "super + shift + {j,k}" = "bspc node -s {south,north}";
+      "super + shift + {h,l}" = "bspc-node-swap {west,east}";
       "super + shift + control + q" = "bspc-close-all-quit";
+      "super + t" = "bspc desktop -l next";
+      "{_,shift +} Print" = "screenshot {yes,no} ${picturesPath}/screenshots";
+      "XF86AudioLowerVolume" = "ponymix decrease 5";
+      "XF86AudioRaiseVolume" = "ponymix increase 5";
+      "XF86AudioMute" = "ponymix toggle";
+      "super + backslash" = "rofi-pulse-select sink";
+      "super + shift backslash" = "rofi-pulse-select source";
     };
   };
 
   services.dunst = {
     enable = true;
-
+    settings = {
+      global = {
+        frame_width = 2;
+        separator_height = 2;
+        separator_color = "frame";
+        font = "${fontFamily} 11";
+      };
+    };
   };
 
   services.polybar = {
     enable = true;
     settings = {
-      "colors" = {
-        background = "\$\{xrdb:color0\}";
-        background-alt = "\$\{xrdb:color1\}";
-        foreground = "\$\{xrdb:color7\}";
-        foreground-alt = "\$\{xrdb:color8\}";
-        primary = "\$\{xrdb:color12\}";
-        secondary = "\$\{xrdb:color14\}";
-        alert = "\$\{xrdb:color11\}";
+      "bar/main" = {
+        monitor = "DP-0";
+        width = "100%";
+        height = 27;
+        line-size = 3;
+        padding-left = 2;
+        padding-right = 2;
+        module-margin-left = 1;
+        module-margin-right = 2;
+        font-0 = "${fontFamily}:pixelsize=10";
+        font-1 = "Siji:pixelsize=10";
+        modules-left = "bspwm";
+        modules-right = "wireless-network wired-network date";
+        tray-position = "right";
+        tray-padding = 2;
+        wm-restack = "bspwm";
+        cursor-click = "pointer";
+        cursor-scroll = "ns-resize";
+      };
+      "module/bspwm" = {
+        type = "internal/bspwm";
+        ws-icon-0 = "1;1";
+        ws-icon-1 = "2;2";
+        ws-icon-2 = "3;3";
+        ws-icon-3 = "4;4";
+        ws-icon-4 = "5;5";
+        label-focused = "%icon%";
+        label-occupied = "%icon%";
+        label-urgent = "%icon%";
+        label-empty = "%icon%";
+        label-separator = "|";
+        label-separator-padding = 2;
+      };
+      "module/wireless-network" = {
+        type = "internal/network";
+        interface = "wlp2s0";
+        interval = 3.0;
+        format-connected = "<ramp-signal> <label-connected>";
+        label-connected = "%essid%  %downspeed%  %upspeed%";
+        format-disconnected = "";
+        ramp-signal-0 = "";
+        ramp-signal-1 = "";
+        ramp-signal-2 = "";
+        ramp-signal-3 = "";
+        ramp-signal-4 = "";
+      };
+      "module/wired-network" = {
+        type = "internal/network";
+        interface = "enp3s0";
+        interval = 3.0;
+        format-connected-prefix = " ";
+        label-connected = " %downspeed%  %upspeed%";
+        format-disconnected = "";
+      };
+      "module/date" = {
+        type = "internal/date";
+        interval = 5;
+        date = "";
+        date-alt = " %Y-%m-%d";
+        time = "%I:%M %p";
+        time-alt = "%X";
+        format-prefix = "";
+        label = "%date% %time%";
       };
     };
     script = ''
-    polybar main &
+    # wait until bspwm starts
+    (
+    until [[ -e /tmp/bspwm_0_0-socket ]]; do
+      ${pkgs.coreutils-full}/bin/sleep 0.1
+    done
+    polybar main
+    ) &
     '';
   };
 
@@ -286,4 +393,29 @@ in
     enable = true;
   };
 
+  services.xidlehook = {
+    enable = true;
+    not-when-fullscreen = true;
+    not-when-audio = true;
+    timers =
+    let
+    minutes = 8;
+    warningSeconds = 15;
+    in
+    [
+      {
+        # warn about screen lock
+        delay = minutes * 60;
+        command = "${pkgs.dunst}/bin/dunstify -p -u low -t ${toString ((warningSeconds - 1) * 1000)} 'Screen lock in ${toString warningSeconds} seconds' >> /tmp/lock_warning_notif_ids";
+        canceller = "while IFS= read -r id; do ${pkgs.dunst}/bin/dunstify -C \"$id\"; done < /tmp/lock_warning_notif_ids; ${pkgs.coreutils-full}/bin/rm /tmp/lock_warning_notif_ids";
+      }
+      {
+        # lock screen
+        delay = warningSeconds;
+	      command = "${pkgs.betterlockscreen}/bin/betterlockscreen --time-format '%I:%M %p' -l dim --off 10";
+      }
+    ];
+  };
+
+  misc = cfg.misc;
 }
