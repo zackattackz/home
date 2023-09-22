@@ -8,7 +8,8 @@ let
 in
 {
   options.misc.themes = {
-    enable = mkEnableOption "set color options in various modules based on theme"; theme = mkOption {
+    enable = mkEnableOption "set color options in various modules based on theme";
+    theme = mkOption {
       type = types.str;
       example = "nord";
       description = "name of the theme file to use";

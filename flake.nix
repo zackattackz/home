@@ -14,6 +14,7 @@
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
+      packageSets = (import ./package-sets/package-sets.nix { inherit pkgs; });
     in {
       homeConfigurations."zaha" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
@@ -24,20 +25,21 @@
 
         # Optionally use extraSpecialArgs
         # to pass through arguments to home.nix
-	extraSpecialArgs = {
-	  cfg = {
-	    misc.themes = {
-	      enable = true;
-	      theme = "nord";
-	    };
-	    home.username = "zaha";
-	  };
-	};
+        extraSpecialArgs = {
+          cfg = {
+            misc.themes = {
+              enable = true;
+              theme = "nord";
+            };
+            home.username = "zaha";
+            home.packages = with packageSets; system ++ games;
+          };
+        };
       };
       nixosConfigurations."nyx" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-	modules = [ ./os/configuration.nix ];
-	specialArgs = { cfg = { hardware.nvidia.enable = true; networking.hostName = "nyx"; }; };
+        modules = [ ./os/configuration.nix ];
+        specialArgs = { cfg = { hardware.nvidia.enable = true; networking.hostName = "nyx"; }; };
       };
     };
 }

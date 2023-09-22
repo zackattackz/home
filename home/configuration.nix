@@ -25,34 +25,7 @@ in
   home.homeDirectory = homeDirectory;
 
   home.stateVersion = "23.05";
-
-  home.packages = with pkgs; [
-    libnotify
-    betterlockscreen
-    discord
-    steam
-    lutris
-    protonup-qt
-    vscode
-    scrot
-    gnome.seahorse
-    gnumake
-    xclip
-    xdotool
-    jq
-    noto-fonts
-    noto-fonts-cjk
-    noto-fonts-emoji
-    siji
-    ponymix
-    (nerdfonts.override { fonts = [
-      "FiraCode"
-      "Iosevka"
-      "Hack"
-      "FantasqueSansMono"
-      "ProggyClean"
-    ]; })
-  ];
+  home.packages = cfg.home.packages;
 
   home.file =
   let
