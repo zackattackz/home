@@ -10,7 +10,7 @@ cursorName = "Nordzy-cursors";
 in
 {
   imports = [
-    ./modules/themes/themes.nix
+    ./modules/themes
   ];
 
   nix.package = pkgs.nix;
@@ -25,7 +25,7 @@ in
   home.homeDirectory = homeDirectory;
 
   home.stateVersion = "23.05";
-  home.packages = cfg.home.packages;
+  home.packages = (cfg.home.getPackages pkgs);
 
   home.file =
   let
@@ -38,6 +38,7 @@ in
     ".local/bin/bspc-close-all-quit".source = ./files/bspc-close-all-quit;
     ".local/bin/bspc-northsouth-focus".source = ./files/bspc-northsouth-focus;
     ".local/bin/rofi-pulse-select".source = ./files/rofi-pulse-select;
+    ".local/bin/external_rules_command".source = ./files/external_rules_command;
     ".local/bin/sss".source = ./files/sss;
     ".local/bin/screenshot".source = ./files/screenshot;
     "${wallpaperPath}".source = wallpaperRepoPath;
@@ -199,6 +200,7 @@ in
   programs.alacritty = {
     enable = true;
     settings = {
+      window.opacity = 0.83;
       font = {
         normal = {
           family = fontFamily;
@@ -226,10 +228,12 @@ in
     windowManager.bspwm = {
       enable = true;
       monitors = {
-        "DP-0" = [ "1" "2" "3" "4" "5"];
+        "DP-0" = [ "web" "code" "term" "media" "games" ];
+        "HDMI-0" = [ "games2" ];
       };
       settings = {
         border_width = 3;
+        external_rules_command = "${homeDirectory}/.local/bin/external_rules_command";
       };
       extraConfig = ''
       feh --no-fehbg --bg-center ${wallpaperPath}
@@ -243,16 +247,18 @@ in
       "super + Return" = "alacritty-keep-cwd";
       "super + w" = "firefox";
       "super + space" = "rofi -show drun";
-      "alt + Tab" = "rofi -show window";
       "super + {_,shift + } q" = "bspc node -{c,k}";
       "super + {1-9}" = "bspc desktop -f '^{1-9}'";
       "super + shift + {1-9}" = "bspc node -d '^{1-9}' --follow";
       "super + {j,k}" = "bspc-northsouth-focus {south,north}";
       "super + {h,l}" = "bspc-node-focus {west,east}";
+      "super + button{4,5}" = "bspc desktop -f {next,prev}";
       "super + shift + {j,k}" = "bspc node -s {south,north}";
       "super + shift + {h,l}" = "bspc-node-swap {west,east}";
       "super + shift + control + q" = "bspc-close-all-quit";
       "super + t" = "bspc desktop -l next";
+      "super + shift + t" = "bspc node -t ~fullscreen";
+      "super + bracketright" = "[[ $(systemctl --user is-active picom) == \"active\" ]] && systemctl --user stop picom || systemctl --user start picom";
       "{_,shift +} Print" = "screenshot {yes,no} ${picturesPath}/screenshots";
       "XF86AudioLowerVolume" = "ponymix decrease 5";
       "XF86AudioRaiseVolume" = "ponymix increase 5";
@@ -266,6 +272,7 @@ in
     enable = true;
     settings = {
       global = {
+        #transparency = 50;
         frame_width = 2;
         separator_height = 2;
         separator_color = "frame";
@@ -276,6 +283,9 @@ in
 
   services.polybar = {
     enable = true;
+    package = pkgs.polybar.override {
+      pulseSupport = true;
+    };
     settings = {
       "bar/main" = {
         monitor = "DP-0";
@@ -289,7 +299,7 @@ in
         font-0 = "${fontFamily}:pixelsize=10";
         font-1 = "Siji:pixelsize=10";
         modules-left = "bspwm";
-        modules-right = "wireless-network wired-network date";
+        modules-right = "pulseaudio wireless-network wired-network date";
         tray-position = "right";
         tray-padding = 2;
         wm-restack = "bspwm";
@@ -298,17 +308,26 @@ in
       };
       "module/bspwm" = {
         type = "internal/bspwm";
-        ws-icon-0 = "1;1";
-        ws-icon-1 = "2;2";
-        ws-icon-2 = "3;3";
-        ws-icon-3 = "4;4";
-        ws-icon-4 = "5;5";
+        ws-icon-0 = "web;";
+        ws-icon-1 = "code;";
+        ws-icon-2 = "term;";
+        ws-icon-3 = "media;";
+        ws-icon-4 = "games;";
         label-focused = "%icon%";
         label-occupied = "%icon%";
         label-urgent = "%icon%";
         label-empty = "%icon%";
         label-separator = "|";
         label-separator-padding = 2;
+      };
+      "module/pulseaudio" = {
+        type = "internal/pulseaudio";
+        label-volume = "%percentage%%";
+        format-volume = "<ramp-volume> <label-volume>";
+        ramp-volume-0 = "";
+        ramp-volume-1 = "";
+        ramp-volume-2 = "";
+        label-muted = "";
       };
       "module/wireless-network" = {
         type = "internal/network";
@@ -388,6 +407,73 @@ in
 	      command = "${pkgs.betterlockscreen}/bin/betterlockscreen --time-format '%I:%M %p' -l dim --off 10";
       }
     ];
+  };
+
+  services.picom = {
+    enable = true;
+    fade = true;
+    fadeDelta = 6;
+    fadeSteps = [ 3.0e-2 1.0 ];
+    fadeExclude = [
+      "window_type *= 'menu'"
+    ];
+    shadow = true;
+    shadowOffsets = [ (-7) (-7) ];
+    shadowOpacity = 0.75;
+    activeOpacity = 1;
+    inactiveOpacity = 0.81;
+    opacityRules = [
+      "0:_NET_WM_STATE@:32a *= '_NET_WM_STATE_HIDDEN'"
+      "100:class_g = 'firefox' && argb"
+      "100:class_g = 'discord'"
+      "100:class_g = 'Alacritty'"
+      "100:class_g = 'steam'"
+    ];
+    vSync = true;
+    wintypes = {
+      tooltip = {
+        fade = true;
+        shadow = true;
+        opacity = 0.75;
+        focus = true;
+        full-shadow = false;
+      };
+      dock = {
+        shadow = false;
+      };
+      utility = {
+        shadow = false;
+        opacity = 1;
+      };
+      dnd = {
+        shadow = false;
+      };
+      popup_menu = {
+        opacity = 1;
+        shadow = false;
+      };
+      dropdown_menu = {
+        opacity = 1;
+        shadow = false;
+      };
+    };
+    settings = {
+      shadow-radius = 7;
+      blur-kern = "3x3box";
+      blur-background-exclude = [
+        "window_type = 'dock'"
+        "window_type = 'desktop'"
+        "_GTK_FRAME_EXTENTS@:c"
+      ];
+      mark-wmwin-focused = true;
+      mark-ovredir-focused = true;
+      detect-rounded-corners = true;
+      detect-client-opacity = true;
+      detect-transient = true;
+      detect-client-leader = true;
+      use-damage = true;
+      xrender-sync-fence = true;
+    };
   };
 
   misc = cfg.misc;

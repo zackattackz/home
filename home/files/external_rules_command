@@ -1,0 +1,11 @@
+#!/bin/sh
+
+eval "$4"
+
+xprops=$(xprop -id $1)
+
+is_steam_game=$(echo "$xprops" | grep '^STEAM_GAME.*=.*')
+if [ -z "$desktop" ] && [ "$is_steam_game" != "" ]; then
+  echo 'desktop=games'
+fi
+

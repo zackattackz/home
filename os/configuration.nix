@@ -61,7 +61,19 @@
   services.xserver = {
     enable = true;
     desktopManager.xterm.enable = false;
-    displayManager.startx.enable = true;
+    desktopManager.session = [
+      {
+        name = "xsession";
+        start = ''
+          ${pkgs.runtimeShell} $HOME/.xsession &
+          waitPID=$!
+        '';
+      }
+    ];
+
+    displayManager.lightdm.enable = true;
+    displayManager.defaultSession = "xsession";
+
     layout = "us";
     xkbVariant = "";
   };
@@ -77,8 +89,8 @@
   users.users.zaha = {
     isNormalUser = true;
     description = "Zachary Hanham";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [];
+    extraGroups = [ "networkmanager" "wheel" "realtime" ];
+    packages = with pkgs; [ sunshine ];
   };
 
   # Allow unfree packages
@@ -101,6 +113,50 @@
 
   programs.dconf.enable = true;
 
+  security.pam.loginLimits = [
+    {
+      domain = "zaha";
+      item = "nofile";
+      value = "524288";
+    }
+    {
+      domain = "@realtime";
+      item = "rtprio";
+      value = "99";
+    }
+    {
+      domain = "@realtime";
+      item = "memlock";
+      value = "unlimited";
+    }
+  ];
+
+  services.avahi = {
+    enable = true;
+    nssmdns = true;
+    publish = {
+      enable = true;
+      addresses = true;
+      domain = true;
+      hinfo = true;
+      userServices = true;
+      workstation = true;
+    };
+  };
+
+  services.udev.extraRules = ''
+    KERNEL=="uinput", SUBSYSTEM=="misc", OPTIONS+="static_node=uinput", TAG+="uaccess"
+  '';
+
+  security.wrappers = {
+    sunshine = {
+      owner = "root";
+      group = "root";
+      capabilities = "cap_sys_admin+p";
+      source = pkgs.sunshine + /bin/sunshine;
+    };
+  };
+
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
@@ -111,6 +167,14 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
+
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [ 47984 47989 48010 ];
+    allowedUDPPortRanges = [
+      { from = 47998; to = 48010; }
+    ];
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

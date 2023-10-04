@@ -48,16 +48,16 @@ in
         frame_color = "#${colors.base0F}";
       };
       urgency_low = {
-        background = "#${colors.base00}";
-        foreground = "#${colors.base04}";
+        background = "#${colors.base00}BF";
+        foreground = "#${colors.base04}FF";
       };
       urgency_normal = {
-        background = "#${colors.base01}";
-        foreground = "#${colors.base06}";
+        background = "#${colors.base01}BF";
+        foreground = "#${colors.base06}FF";
       };
       urgency_critical = {
-        background = "#${colors.base01}";
-        foreground = "#${colors.base09}";
+        background = "#${colors.base01}BF";
+        foreground = "#${colors.base09}FF";
       };
     };
 

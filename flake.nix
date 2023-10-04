@@ -14,17 +14,11 @@
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
-      packageSets = (import ./package-sets/package-sets.nix { inherit pkgs; });
+      packageGroups = import ./modules/package-groups;
     in {
       homeConfigurations."zaha" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-
-        # Specify your home configuration modules here, for example,
-        # the path to your home.nix.
         modules = [ ./home/configuration.nix ];
-
-        # Optionally use extraSpecialArgs
-        # to pass through arguments to home.nix
         extraSpecialArgs = {
           cfg = {
             misc.themes = {
@@ -32,7 +26,7 @@
               theme = "nord";
             };
             home.username = "zaha";
-            home.packages = with packageSets; system ++ games;
+            home.getPackages = pkgs: (packageGroups.system pkgs) ++ (packageGroups.games pkgs);
           };
         };
       };

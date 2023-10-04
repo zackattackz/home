@@ -1,23 +1,28 @@
-{pkgs, ...}:
+pkgs:
 
 with pkgs;
 
 [
-  libnotify
+  # applications
   betterlockscreen
+  btop
   discord
-  vscode
-  scrot
   gnome.seahorse
   gnumake
+  jq
+  libnotify
+  ponymix
+  scrot
+  tldr
+  vscode
   xclip
   xdotool
-  jq
+
+  # fonts
   noto-fonts
   noto-fonts-cjk
   noto-fonts-emoji
   siji
-  ponymix
   (nerdfonts.override { fonts = [
     "FiraCode"
     "Iosevka"
