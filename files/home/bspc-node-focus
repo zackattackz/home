@@ -10,9 +10,9 @@ bspc_node_focus_directionmost() {
 
 SELECTOR=$1
 
-bspc node -f "$SELECTOR"
-
-if [ $? -ne 0 ]; then
+if bspc query -N -n "$SELECTOR.local"; then
+  bspc node -f "$SELECTOR"
+else
   case "$SELECTOR" in
     "east")
       DIRECTION="next"
@@ -23,6 +23,7 @@ if [ $? -ne 0 ]; then
       SELECTOR="east"
       ;;
   esac
+  SELECTOR="$SELECTOR.local"
   if [ -n "$DIRECTION" ]; then
     bspc desktop -f "$DIRECTION"
     bspc_node_focus_directionmost "$SELECTOR"

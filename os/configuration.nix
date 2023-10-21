@@ -28,6 +28,9 @@
   };
 
   hardware.nvidia = cfg.hardware.nvidia;
+  
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
 
   networking.hostName = cfg.networking.hostName; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -72,6 +75,9 @@
     ];
 
     displayManager.lightdm.enable = true;
+    displayManager.sessionCommands = ''
+      ${pkgs.lightlocker}/bin/light-locker &
+    '';
     displayManager.defaultSession = "xsession";
 
     layout = "us";
@@ -84,6 +90,8 @@
     alsa.support32Bit = true;
     pulse.enable = true;
   };
+
+  services.blueman.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.zaha = {
@@ -175,6 +183,8 @@
       { from = 47998; to = 48010; }
     ];
   };
+
+  virtualisation.waydroid.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

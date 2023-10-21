@@ -1,18 +1,17 @@
-{ config, lib, pkgs, ...}:
+{ config, lib, pkgs, globals, ...}:
 
 with lib;
 
 let
-  cfg = config.misc.themes;
+  cfg = config.themes;
   colors = import ./colors/${cfg.theme}.nix;
 in
 {
-  options.misc.themes = {
-    enable = mkEnableOption "set color options in various modules based on theme";
+  options.themes = {
+    enable = mkEnableOption "Manages theming options of all modules";
     theme = mkOption {
       type = types.str;
-      example = "nord";
-      description = "name of the theme file to use";
+      description = "Name of theme to use";
     };
   };
   config = mkIf cfg.enable {

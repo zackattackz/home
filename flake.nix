@@ -13,21 +13,30 @@
   outputs = { nixpkgs, home-manager, ... }:
     let
       system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
-      packageGroups = import ./modules/package-groups;
+      pkgs = import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+        config.allowUnfreePredicate = pkg: true;
+      };
     in {
       homeConfigurations."zaha" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        modules = [ ./home/configuration.nix ];
-        extraSpecialArgs = {
-          cfg = {
-            misc.themes = {
-              enable = true;
-              theme = "nord";
-            };
-            home.username = "zaha";
-            home.getPackages = pkgs: (packageGroups.system pkgs) ++ (packageGroups.games pkgs);
+        modules = [
+          ./users/zaha.nix
+        ];
+        extraSpecialArgs = rec {
+          homeFilesPath = ./files/home;
+          homeModulesPath = ./modules/home;
+          globals = rec {
+            username = "zaha";
+            homeDirectory = "/home/${username}";
+            fontFamily = "Iosevka NFM";
+            wallpaper = "aurora1.png";
+            picturesPath =  "${homeDirectory}/pictures";
+            wallpaperPath = "${picturesPath}/wallpapers/${wallpaper}";
+            filesPath = homeFilesPath;
           };
+
         };
       };
       nixosConfigurations."nyx" = nixpkgs.lib.nixosSystem {

@@ -1,0 +1,9 @@
+#!/bin/sh
+set -e
+CARDS=$(ponymix list-cards | sed '1!s/^card/|card/')
+SELECTED_CARD=$(echo "$CARDS" | rofi -dmenu -eh 4 -sep '|')
+SELECTED_CARD=$(echo "$SELECTED_CARD" | grep -oE '[0-9]+' | head -1)
+PROFILES=$(ponymix -c "$SELECTED_CARD" list-profiles | sed '1!n;1!s/^/|/')
+SELECTED_PROFILE=$(echo "$PROFILES" | rofi -dmenu -eh 2 -sep '|')
+SELECTED_PROFILE=$(echo "$SELECTED_PROFILE" | head -n1 | cut -d " " -f1)
+ponymix -c "$SELECTED_CARD" set-profile "$SELECTED_PROFILE"

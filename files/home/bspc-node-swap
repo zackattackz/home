@@ -23,6 +23,7 @@ if [ $? -ne 0 ]; then
       SELECTOR="east"
       ;;
   esac
+  SELECTOR="$SELECTOR.local"
   if [ -n "$DIRECTION" ]; then
     bspc node -d "$DIRECTION" --follow
     bspc_node_swap_directionmost "$SELECTOR"
