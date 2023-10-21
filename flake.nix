@@ -41,8 +41,10 @@
       };
       nixosConfigurations."nyx" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        modules = [ ./os/configuration.nix ];
-        specialArgs = { cfg = { hardware.nvidia.enable = true; networking.hostName = "nyx"; }; };
+        modules = [ ./systems/nyx.nix ];
+        specialArgs = {
+          systemModulesPath = ./modules/system;
+        };
       };
     };
 }
