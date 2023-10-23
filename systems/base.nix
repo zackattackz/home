@@ -13,6 +13,7 @@
     (systemModulesPath + /nvidia)
     (systemModulesPath + /os)
     (systemModulesPath + /pipewire)
+    (systemModulesPath + /postgres)
     (systemModulesPath + /waydroid)
     (systemModulesPath + /xserver)
   ];

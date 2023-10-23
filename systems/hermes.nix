@@ -28,6 +28,8 @@ with lib;
 
     pipewire.enable = true;
 
+    postgres.enable = true;
+
     waydroid.enable = true;
 
     xserver.enable = true;
