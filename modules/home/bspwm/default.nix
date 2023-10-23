@@ -15,8 +15,8 @@ in
       windowManager.bspwm = {
         enable = true;
         monitors = {
-          "DP-0" = [ "web" "code" "term" "media" "games" ];
-          "HDMI-0" = [ "games2" ];
+          "${globals.firstMonitor}" = [ "web" "code" "term" "media" "games" ];
+          "${globals.secondMonitor}" = [ "games2" ];
         };
         settings = {
           border_width = 3;

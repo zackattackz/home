@@ -18,7 +18,7 @@
         config.allowUnfree = true;
         config.allowUnfreePredicate = pkg: true;
       };
-      homeArgs = usernameInput: rec {
+      homeArgs = usernameInput: firstMonitorInput: secondMonitorInput: rec {
         homeFilesPath = ./files/home;
         homeModulesPath = ./modules/home;
         globals = rec {
@@ -29,22 +29,38 @@
           picturesPath =  "${homeDirectory}/pictures";
           wallpaperPath = "${picturesPath}/wallpapers/${wallpaper}";
           filesPath = homeFilesPath;
+          firstMonitor = firstMonitorInput;
+          secondMonitor = secondMonitorInput;
         };
       };
     in {
-      homeConfigurations."zaha" = home-manager.lib.homeManagerConfiguration {
+      homeConfigurations."zaha@nyx" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [
           ./users/zaha.nix
         ];
-        extraSpecialArgs = homeArgs "zaha";
+        extraSpecialArgs = homeArgs "zaha" "DP-0" "HDMI-0";
       };
-      homeConfigurations."zaha-odoo" = home-manager.lib.homeManagerConfiguration {
+      homeConfigurations."zaha-odoo@nyx" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [
           ./users/zaha-odoo.nix
         ];
-        extraSpecialArgs = homeArgs "zaha-odoo";
+        extraSpecialArgs = homeArgs "zaha-odoo" "DP-0" "HDMI-0";
+      };
+      homeConfigurations."zaha@hermes" = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = [
+          ./users/zaha.nix
+        ];
+        extraSpecialArgs = homeArgs "zaha" "eDP-1" "HDMI-1";
+      };
+      homeConfigurations."zaha-odoo@hermes" = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = [
+          ./users/zaha-odoo.nix
+        ];
+        extraSpecialArgs = homeArgs "zaha-odoo" "eDP-1" "HDMI-1";
       };
       nixosConfigurations."nyx" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";

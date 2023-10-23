@@ -17,6 +17,7 @@ with lib;
     bluetooth.enable = true;
 
     bootloader.enable = true;
+    bootloader.enableCryptoKeyfile.enable = true;
 
     locale.enable = true;
 

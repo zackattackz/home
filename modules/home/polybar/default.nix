@@ -15,7 +15,7 @@ in
       };
       settings = {
         "bar/main" = {
-          monitor = "DP-0";
+          monitor = globals.firstMonitor;
           width = "100%";
           height = 27;
           line-size = 3;

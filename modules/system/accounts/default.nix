@@ -18,7 +18,7 @@ in
       description = "Zachary Hanham - personal";
       extraGroups = [ "networkmanager" "wheel" "realtime" ];
     };
-    users.users.zaha-odoo = mkIf cfg.zaha.enable {
+    users.users.zaha-odoo = mkIf cfg.zaha-odoo.enable {
       isNormalUser = true;
       description = "Zachary Hanham - work";
       extraGroups = [ "networkmanager" "wheel" "realtime" ];
