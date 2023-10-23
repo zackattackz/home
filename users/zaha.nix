@@ -43,6 +43,9 @@ with lib;
 
     shell.enable = true;
 
+    ssh.enable = true;
+    ssh.zaha.enable = true;
+
     sxhkd.enable = true;
     
     themes.enable = true;

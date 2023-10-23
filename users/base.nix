@@ -18,6 +18,7 @@
     (homeModulesPath + /polybar)
     (homeModulesPath + /rofi)
     (homeModulesPath + /shell)
+    (homeModulesPath + /ssh)
     (homeModulesPath + /sxhkd)
     (homeModulesPath + /themes)
   ];
