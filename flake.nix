@@ -53,5 +53,12 @@
           systemModulesPath = ./modules/system;
         };
       };
+      nixosConfigurations."hermes" = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [ ./systems/hermes.nix ];
+        specialArgs = {
+          systemModulesPath = ./modules/system;
+        };
+      };
     };
 }
