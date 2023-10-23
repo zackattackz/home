@@ -14,6 +14,7 @@
     (homeModulesPath + /locker)
     (homeModulesPath + /meta)
     (homeModulesPath + /neovim)
+    (homeModulesPath + /odoo)
     (homeModulesPath + /picom)
     (homeModulesPath + /polybar)
     (homeModulesPath + /rofi)

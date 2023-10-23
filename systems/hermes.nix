@@ -33,5 +33,9 @@ with lib;
     waydroid.enable = true;
 
     xserver.enable = true;
+
+    environment.systemPackages = [ pkgs.gnome.gnome-keyring ];
+
+    # services.gnome3.gnome-keyring.enable = true;
   };
 }

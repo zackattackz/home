@@ -12,7 +12,6 @@ in
     zaha-odoo.enable = mkEnableOption "odoo id";
   };
   config = mkIf cfg.enable {
-    services.ssh-agent.enable = true;
     programs.ssh = {
       enable = true;
       matchBlocks = {

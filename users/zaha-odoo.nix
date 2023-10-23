@@ -34,6 +34,8 @@ with lib;
 
     neovim.enable = true;
 
+    odoo.enable = true;
+
     picom.enable = true;
 
     polybar.enable = true;

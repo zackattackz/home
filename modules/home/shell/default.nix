@@ -17,12 +17,6 @@ in
       "$HOME/.local/bin"
     ];
 
-    services.gpg-agent.enable = true;
-
-    services.gnome-keyring = {
-      enable = true;
-    };
-
     xdg.enable = true;
 
     xdg.userDirs = {
