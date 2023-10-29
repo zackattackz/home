@@ -14,6 +14,26 @@ in
         #type database  DBuser  auth-method
         local all       all     trust
       '';
+      ensureUsers = [
+        {
+          name = "zaha";
+          ensurePermissions = {
+            "ALL TABLES IN SCHEMA public" = "ALL PRIVILEGES"; 
+          };
+          ensureClauses.createdb = true;
+        }
+        {
+          name = "zaha-odoo";
+          ensurePermissions = {
+            "ALL TABLES IN SCHEMA public" = "ALL PRIVILEGES"; 
+          };
+          ensureClauses.createdb = true;
+        }
+      ];
+      ensureDatabases = [
+        "zaha"
+        "zaha-odoo"
+      ];
     };
   };
 }
