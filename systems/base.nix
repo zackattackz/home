@@ -7,6 +7,8 @@
     (systemModulesPath + /avahi)
     (systemModulesPath + /bluetooth)
     (systemModulesPath + /bootloader)
+    (systemModulesPath + /docker)
+    (systemModulesPath + /gnome-keyring)
     (systemModulesPath + /locale)
     (systemModulesPath + /meta)
     (systemModulesPath + /network)

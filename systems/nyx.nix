@@ -17,7 +17,11 @@ with lib;
     bluetooth.enable = true;
 
     bootloader.enable = true;
-    bootloader.enableCryptoKeyfile.enable = true;
+    bootloader.enableCryptoKeyfile = true;
+
+    docker.enable = true;
+    
+    gnome-keyring.enable = true;
 
     locale.enable = true;
 
@@ -31,6 +35,7 @@ with lib;
     os.enable = true;
 
     pipewire.enable = true;
+    postgres.enable = true;
 
     waydroid.enable = true;
 

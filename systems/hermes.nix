@@ -17,6 +17,10 @@ with lib;
 
     bootloader.enable = true;
 
+    docker.enable = true;
+    
+    gnome-keyring.enable = true;
+
     locale.enable = true;
 
     meta.enable = true;
@@ -34,8 +38,6 @@ with lib;
 
     xserver.enable = true;
 
-    environment.systemPackages = [ pkgs.gnome.gnome-keyring ];
 
-    # services.gnome3.gnome-keyring.enable = true;
   };
 }

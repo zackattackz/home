@@ -12,10 +12,6 @@ in
   config = mkIf cfg.enable {
     xsession ={
       enable = true;
-        initExtra = ''
-          eval $(${pkgs.gnome3.gnome-keyring}/bin/gnome-keyring-daemon --daemonize --components=ssh,secrets,pkcs11)
-          export SSH_AUTH_SOCK
-      '';
       windowManager.bspwm = {
         enable = true;
         monitors = {
