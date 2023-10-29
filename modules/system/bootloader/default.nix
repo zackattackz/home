@@ -13,13 +13,8 @@ in
   config = mkIf cfg.enable {
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
-    boot.initrd.secrets = (if cfg.enableCryptoKeyfile
-    then
-      {
-        "/crypto_keyfile.bin" = null;
-      }
-    else
-      { }
-    );
+    boot.initrd.secrets = mkIf cfg.enableCryptoKeyfile {
+      "/crypto_keyfile.bin" = null;
+    };
   };
 }
