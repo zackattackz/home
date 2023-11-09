@@ -1,4 +1,4 @@
-.PHONY: all os home
+.PHONY: all os home news
 
 ROOT_DIR := $(dir $(realpath $(lastword $(MAKEFILE_LIST))))
 
@@ -9,3 +9,6 @@ os:
 
 home:
 	home-manager switch --flake "$(ROOT_DIR)"
+
+news:
+	home-manager news --flake "$(ROOT_DIR)"
