@@ -8,6 +8,10 @@ in
 {
   options.polybar.enable = mkEnableOption "polybar options";
   config = mkIf cfg.enable {
+    systemd.user.services.polybar.Install.WantedBy = lib.mkForce [];
+    xsession.windowManager.bspwm.extraConfig = ''
+      polybar main &
+    '';
     services.polybar = {
       enable = true;
       package = pkgs.polybar.override {
@@ -88,15 +92,8 @@ in
           label = "%date% %time%";
         };
       };
-      script = ''
-      # wait until bspwm starts
-      (
-      until [[ -e /tmp/bspwm_0_0-socket ]]; do
-        ${pkgs.coreutils-full}/bin/sleep 0.1
-      done
-      polybar main
-      ) &
-      '';
+      # Must be defined for bspwm workaround
+      script = '''';
     };
   };
 }
