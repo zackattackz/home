@@ -8,6 +8,8 @@ in
 {
   options.locker.enable = mkEnableOption "Screen locker options";
   config = mkIf cfg.enable {
+    home.packages = [ pkgs.lightlocker ];
+    services.sxhkd.keybindings."super + shift + control + l" = "light-locker-command --lock";
     services.xidlehook = {
       enable = true;
       not-when-fullscreen = true;
