@@ -14,6 +14,7 @@ in
       # applications
       btop
       discord
+      element-desktop
       gnome.seahorse
       gnumake
       jq
