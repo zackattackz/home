@@ -25,7 +25,9 @@ in
         {
           name = "zaha-odoo";
           ensurePermissions = {
-            "ALL TABLES IN SCHEMA public" = "ALL PRIVILEGES"; 
+            "ALL TABLES IN SCHEMA public" = "ALL PRIVILEGES";
+            "SCHEMA public" = "USAGE";
+            "FUNCTION pg_stat_file(text)" = "EXECUTE";
           };
           ensureClauses.createdb = true;
         }
