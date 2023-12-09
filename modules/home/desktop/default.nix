@@ -27,6 +27,10 @@ in
 
     gtk = {
       enable = true;
+      theme = {
+        package = pkgs.nordic;
+        name = "Nordic";
+      };
       cursorTheme = {
          name = cfg.cursorName;
          size = 16;
