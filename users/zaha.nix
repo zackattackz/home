@@ -10,6 +10,8 @@ with lib;
   config = {
 
     alacritty.enable = true;
+
+    autorandr.enable = true;
     
     bspwm.enable = true;
 

@@ -4,6 +4,7 @@
 {
   imports = [
     (homeModulesPath + /alacritty)
+    (homeModulesPath + /autorandr)
     (homeModulesPath + /bspwm)
     (homeModulesPath + /desktop)
     (homeModulesPath + /extraPackages)

@@ -14,5 +14,5 @@ in
     programs.autorandr = {
       enable = true;
     };
-  }
+  };
 }
