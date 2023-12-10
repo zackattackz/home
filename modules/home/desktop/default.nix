@@ -31,6 +31,10 @@ in
         package = pkgs.nordic;
         name = "Nordic";
       };
+      iconTheme = {
+        package = pkgs.gnome.adwaita-icon-theme;
+        name = "Adwaita";
+      };
       cursorTheme = {
          name = cfg.cursorName;
          size = 16;
