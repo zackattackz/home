@@ -25,11 +25,15 @@ in
       open = false;
       nvidiaSettings = true;
       package = config.boot.kernelPackages.nvidiaPackages.stable;
-      forceFullCompositionPipeline = true;
     };
 
     services.xserver = {
       videoDrivers = [ "nvidia" ];
+    };
+
+    specialisation.fullCompPipe.configuration = {
+      system.nixos.tags = [ "fullCompPipe" ];
+      hardware.nvidia.forceFullCompositionPipeline = true;
     };
   };
 }
