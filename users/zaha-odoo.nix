@@ -15,6 +15,8 @@ with lib;
     
     bspwm.enable = true;
 
+    caffeine.enable = true;
+
     desktop = {
       enable = true;
       cursorName = "Nordzy-cursors";

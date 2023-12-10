@@ -6,6 +6,7 @@
     (homeModulesPath + /alacritty)
     (homeModulesPath + /autorandr)
     (homeModulesPath + /bspwm)
+    (homeModulesPath + /caffeine)
     (homeModulesPath + /desktop)
     (homeModulesPath + /extraPackages)
     (homeModulesPath + /feh)
