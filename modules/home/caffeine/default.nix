@@ -13,6 +13,6 @@ in
     services.caffeine = {
       enable = true;
     };
-    systemd.user.services.caffeine.Service.ProtectHome = lib.mkForce "no";
+    systemd.user.services.caffeine.Service.ProtectSystem = lib.mkForce "no";
   };
 }
