@@ -32,6 +32,8 @@ in
         "XF86AudioMute" = "ponymix toggle";
         "super + backslash" = "rofi-pulse-select sink";
         "super + shift backslash" = "rofi-pulse-select source";
+        "super + alt backslash" = "rofi-pulse-profile";
+        "super + apostrophe" = "rofi-autorandr";
       };
     };
   };
