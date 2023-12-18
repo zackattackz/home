@@ -29,8 +29,14 @@ with lib;
 
     file.enable = true;
     file.autorandrBspcCmds = {
-      "single" = "bspc monitor 'HDMI-0' -r";
-      "double" = "bspc monitor 'HDMI-0' -a second";
+      "single" = ''
+        NODES=$(bspc query -N -m 'HDMI-0')
+        for node in $NODES; do
+          bspc node $node -d games
+        done
+        bspc monitor 'HDMI-0' -r
+      '';
+      "double" = "bspc monitor 'HDMI-0' -a games2";
     };
 
     firefox.enable = true;
