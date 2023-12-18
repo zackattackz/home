@@ -28,6 +28,10 @@ with lib;
     feh.enable = true;
 
     file.enable = true;
+    file.autorandrBspcCmds = {
+      "single" = "bspc monitor 'HDMI-0' -r";
+      "double" = "bspc monitor 'HDMI-0' -a second";
+    };
 
     firefox.enable = true;
 
