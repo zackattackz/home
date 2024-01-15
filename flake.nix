@@ -3,9 +3,9 @@
 
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/release-23.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -17,64 +17,64 @@
         inherit system;
         config.allowUnfree = true;
         config.allowUnfreePredicate = pkg: true;
+        overlays = [ overlay ];
       };
-      homeArgs = usernameInput: firstMonitorInput: secondMonitorInput: rec {
+      homeArgs = { username, ... }: {
+        inherit username;
         homeFilesPath = ./files/home;
         homeModulesPath = ./modules/home;
-        globals = rec {
-          username = usernameInput;
-          homeDirectory = "/home/${username}";
-          fontFamily = "Iosevka NFM";
-          wallpaper = "aurora1.png";
-          picturesPath =  "${homeDirectory}/pictures";
-          wallpaperPath = "${picturesPath}/wallpapers/${wallpaper}";
-          filesPath = homeFilesPath;
-          firstMonitor = firstMonitorInput;
-          secondMonitor = secondMonitorInput;
-        };
+      };
+      systemArgs = {
+        inherit overlay;
+        systemModulesPath = ./modules/system;
+      };
+      maintainers.zackattackz = {
+        email = "z@zmhanham.com";
+        github = "zackattackz";
+        githubId = 39349995;
+        name = "Zachary Hanham";
+      };
+      overlay = final: prev: {
+        atlasvpn = import ./pkgs/applications/networking/atlasvpn { inherit maintainers; } pkgs;
       };
     in {
       homeConfigurations."zaha@nyx" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        modules = [
-          ./users/zaha.nix
-        ];
-        extraSpecialArgs = homeArgs "zaha" "DP-0" "HDMI-0";
+        modules = [ ./users/zaha.nix ];
+        extraSpecialArgs = homeArgs {
+          username = "zaha";
+        };
       };
       homeConfigurations."zaha-odoo@nyx" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        modules = [
-          ./users/zaha-odoo.nix
-        ];
-        extraSpecialArgs = homeArgs "zaha-odoo" "DP-0" "HDMI-0";
+        modules = [ ./users/zaha-odoo.nix ];
+        extraSpecialArgs = homeArgs {
+          username = "zaha-odoo";
+        };
       };
       homeConfigurations."zaha@hermes" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        modules = [
-          ./users/zaha.nix
-        ];
-        extraSpecialArgs = homeArgs "zaha" "eDP-1" "HDMI-1";
+        modules = [ ./users/zaha.nix ];
+        extraSpecialArgs = homeArgs {
+          username = "zaha";
+        };
       };
       homeConfigurations."zaha-odoo@hermes" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        modules = [
-          ./users/zaha-odoo.nix
-        ];
-        extraSpecialArgs = homeArgs "zaha-odoo" "eDP-1" "HDMI-1";
+        modules = [ ./users/zaha-odoo.nix ];
+        extraSpecialArgs = homeArgs {
+          username = "zaha-odoo";
+        };
       };
       nixosConfigurations."nyx" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [ ./systems/nyx.nix ];
-        specialArgs = {
-          systemModulesPath = ./modules/system;
-        };
+        specialArgs = systemArgs;
       };
       nixosConfigurations."hermes" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [ ./systems/hermes.nix ];
-        specialArgs = {
-          systemModulesPath = ./modules/system;
-        };
+        specialArgs = systemArgs;
       };
     };
 }

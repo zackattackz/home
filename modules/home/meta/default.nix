@@ -1,4 +1,4 @@
-{ config, lib, pkgs, globals, ... }:
+{ config, lib, pkgs, username, ... }:
 
 with lib;
 
@@ -16,10 +16,12 @@ in
 
     nixpkgs.config.allowUnfreePredicate = (pkg: true);
 
-    home.username = globals.username;
-    home.homeDirectory = globals.homeDirectory;
+    home = {
+      inherit username;
+      homeDirectory = "/home/${username}";
+      stateVersion = "23.05";
+    };
 
-    home.stateVersion = "23.05";
     programs.home-manager.enable = true;
   };
 }

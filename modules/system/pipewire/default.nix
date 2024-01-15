@@ -14,5 +14,6 @@ in
       alsa.support32Bit = true;
       pulse.enable = true;
     };
+    hardware.pulseaudio.enable = lib.mkForce false;
   };
 }

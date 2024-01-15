@@ -10,7 +10,6 @@ in
   config = mkIf cfg.enable {
     hardware.bluetooth.enable = true;
     hardware.bluetooth.powerOnBoot = true;
-    services.blueman.enable = true;
     environment.etc."wireplumber/bluetooth.lua.d/51-bluez-config.lua".text = ''
       bluez_monitor.properties = {
         ["bluez5.enable-sbc-xq"] = true,

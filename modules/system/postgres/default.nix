@@ -17,18 +17,22 @@ in
       ensureUsers = [
         {
           name = "zaha";
-          ensurePermissions = {
-            "ALL TABLES IN SCHEMA public" = "ALL PRIVILEGES"; 
-          };
+          ensureDBOwnership = true;
+          # ensurePermissions = {
+          #   "ALL TABLES IN SCHEMA public" = "ALL PRIVILEGES";
+          #   "SCHEMA public" = "USAGE";
+          #   "FUNCTION pg_stat_file(text)" = "EXECUTE";
+          # };
           ensureClauses.createdb = true;
         }
         {
           name = "zaha-odoo";
-          ensurePermissions = {
-            "ALL TABLES IN SCHEMA public" = "ALL PRIVILEGES";
-            "SCHEMA public" = "USAGE";
-            "FUNCTION pg_stat_file(text)" = "EXECUTE";
-          };
+          ensureDBOwnership = true;
+          # ensurePermissions = {
+          #   "ALL TABLES IN SCHEMA public" = "ALL PRIVILEGES";
+          #   "SCHEMA public" = "USAGE";
+          #   "FUNCTION pg_stat_file(text)" = "EXECUTE";
+          # };
           ensureClauses.createdb = true;
         }
       ];

@@ -1,14 +1,15 @@
 
-{config, lib, pkgs, systemModulesPath, ...}:
+{config, lib, pkgs, systemModulesPath, overlay, ...}:
 
 {
   imports = [
     (systemModulesPath + /accounts)
+    (systemModulesPath + /atlasvpn)
     (systemModulesPath + /avahi)
     (systemModulesPath + /bluetooth)
     (systemModulesPath + /bootloader)
     (systemModulesPath + /docker)
-    (systemModulesPath + /gnome-keyring)
+    (systemModulesPath + /gamemode)
     (systemModulesPath + /locale)
     (systemModulesPath + /meta)
     (systemModulesPath + /network)
@@ -16,7 +17,10 @@
     (systemModulesPath + /os)
     (systemModulesPath + /pipewire)
     (systemModulesPath + /postgres)
+    (systemModulesPath + /virt)
     (systemModulesPath + /waydroid)
     (systemModulesPath + /xserver)
+    (systemModulesPath + /xfce)
   ];
+  nixpkgs.overlays = [ overlay ];
 }

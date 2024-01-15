@@ -1,15 +1,16 @@
-{ config, lib, pkgs, globals, ... }:
+{ config, lib, pkgs, ... }:
 
 with lib;
 
 let
   cfg = config.odoo;
+  homeCfg = config.home;
 in
 {
   options.odoo.enable = mkEnableOption "odoo options";
   config = mkIf cfg.enable {
     home.sessionVariables = {
-      OE_SUPPORT_PATH = "${globals.homeDirectory}/src/odoo/support-tools";
+      OE_SUPPORT_PATH = "${homeCfg.homeDirectory}/src/odoo/support-tools";
     };
     home.packages = [
       (pkgs.writeShellScriptBin "oe-support" ''

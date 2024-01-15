@@ -11,6 +11,8 @@ with lib;
   config = {
     accounts.zaha-odoo.enable = true;
 
+    atlasvpn.enable = true;
+
     avahi.enable = true;
 
     bluetooth.enable = true;
@@ -19,8 +21,6 @@ with lib;
 
     docker.enable = true;
     
-    gnome-keyring.enable = true;
-
     locale.enable = true;
 
     meta.enable = true;
@@ -37,6 +37,8 @@ with lib;
     waydroid.enable = true;
 
     xserver.enable = true;
+
+    xfce.enable = true;
 
 
   };

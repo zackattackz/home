@@ -1,9 +1,0 @@
-#!/bin/sh
-set -e
-source "$XDG_CONFIG_HOME/rofi-autorandr-bspc-cmds"
-PROFILES=$(autorandr --list)
-SELECTED_PROFILE=$(echo "$PROFILES" | rofi -dmenu)
-autorandr -l "$SELECTED_PROFILE" --force
-CMD="AUTORANDR_BSPC_CMD_${SELECTED_PROFILE}"
-eval "${!CMD}"
-bspc wm -r

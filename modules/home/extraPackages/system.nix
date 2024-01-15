@@ -1,4 +1,4 @@
-{config, lib, pkgs, globals, ...}:
+{config, lib, pkgs, ...}:
 
 with lib;
 
@@ -12,25 +12,32 @@ in
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
       # applications
-      btop
+      atlasvpn
+      caffeine-ng
       discord
       element-desktop
       gnome.seahorse
+      gnome.gnome-disk-utility
+      gnome.file-roller
       gnumake
+      transmission-gtk
+      mpv
+      ffmpeg-full
       jq
-      libnotify
-      ponymix
-      scrot
+      killall
       tldr
+      unzip
       vscode
       xclip
-      xdotool
-
+      zip
+      evince
+      libreoffice
+      pavucontrol
+      qalculate-gtk
       # fonts
       noto-fonts
       noto-fonts-cjk
       noto-fonts-emoji
-      siji
       (nerdfonts.override { fonts = [
         "FiraCode"
         "Iosevka"

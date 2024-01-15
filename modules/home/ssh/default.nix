@@ -1,9 +1,10 @@
-{ config, lib, pkgs, globals, ... }:
+{ config, lib, pkgs, ... }:
 
 with lib;
 
 let
   cfg = config.ssh;
+  homeCfg = config.home;
 in
 {
   options.ssh = {
@@ -18,13 +19,13 @@ in
         "zackattackz" = mkIf cfg.zaha.enable {
           hostname = "github.com";
           user = "z.hanham00@gmail.com";
-          identityFile = "${globals.homeDirectory}/.ssh/id_ed25519";
+          identityFile = "${homeCfg.homeDirectory}/.ssh/id_ed25519";
           identitiesOnly = true;
         };
         "zaha-odoo" = mkIf cfg.zaha-odoo.enable {
           hostname = "github.com";
           user = "zaha@odoo.com";
-          identityFile = "${globals.homeDirectory}/.ssh/id_odoo";
+          identityFile = "${homeCfg.homeDirectory}/.ssh/id_odoo";
           identitiesOnly = true;
         };
       };

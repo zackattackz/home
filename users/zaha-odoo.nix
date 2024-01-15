@@ -9,42 +9,19 @@ with lib;
   
   config = {
 
-    alacritty.enable = true;
-
-    autorandr.enable = true;
-    
-    bspwm.enable = true;
-
-    caffeine.enable = true;
-
-    desktop = {
-      enable = true;
-      cursorName = "Nordzy-cursors";
-    };
-
     extraPackages.system.enable = true;
-
-    feh.enable = true;
-
-    file.enable = true;
 
     firefox.enable = true;
 
     git.enable = true;
 
-    locker.enable = true;
-
+    gpg.enable = true;
+    
     meta.enable = true;
 
     neovim.enable = true;
 
     odoo.enable = true;
-
-    picom.enable = true;
-
-    polybar.enable = true;
-
-    rofi.enable = true;
 
     shell.enable = true;
 
@@ -52,9 +29,8 @@ with lib;
     ssh.zaha.enable = true;
     ssh.zaha-odoo.enable = true;
 
-    sxhkd.enable = true;
-    
-    themes.enable = true;
-    themes.theme = "nord";
+    wine.enable = true;
+
+    xfce.enable = true;
   };
 }

@@ -1,9 +1,10 @@
-{ config, lib, pkgs, globals, ... }:
+{ config, lib, pkgs, ... }:
 
 with lib;
 
 let
   cfg = config.shell;
+  homeCfg = config.home;
   tmuxTerminal = "tmux-256color";
 in
 {
@@ -19,19 +20,19 @@ in
 
     xdg.enable = true;
 
-    xdg.userDirs = {
+    xdg.userDirs = rec {
       enable = true;
       createDirectories = true;
       desktop = null;
-      documents = "${globals.homeDirectory}/documents";
-      download = "${globals.homeDirectory}/downloads";
-      music = "${globals.homeDirectory}/music";
-      pictures = globals.picturesPath;
+      documents = "${homeCfg.homeDirectory}/documents";
+      download = "${homeCfg.homeDirectory}/downloads";
+      music = "${homeCfg.homeDirectory}/music";
+      pictures = "${homeCfg.homeDirectory}/pictures";
       publicShare = null;
       templates = null;
-      videos = "${globals.homeDirectory}/videos";
+      videos = "${homeCfg.homeDirectory}/videos";
       extraConfig = {
-        "XDG_SCREENSHOTS_DIR" = "${globals.picturesPath}/screenshots";
+        "XDG_SCREENSHOTS_DIR" = "${pictures}/screenshots";
       };
     };
 

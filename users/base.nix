@@ -3,26 +3,17 @@
 
 {
   imports = [
-    (homeModulesPath + /alacritty)
-    (homeModulesPath + /autorandr)
-    (homeModulesPath + /bspwm)
-    (homeModulesPath + /caffeine)
-    (homeModulesPath + /desktop)
     (homeModulesPath + /extraPackages)
-    (homeModulesPath + /feh)
-    (homeModulesPath + /file)
     (homeModulesPath + /firefox)
     (homeModulesPath + /git)
-    (homeModulesPath + /locker)
+    (homeModulesPath + /gpg)
     (homeModulesPath + /meta)
     (homeModulesPath + /neovim)
     (homeModulesPath + /odoo)
-    (homeModulesPath + /picom)
-    (homeModulesPath + /polybar)
-    (homeModulesPath + /rofi)
     (homeModulesPath + /shell)
     (homeModulesPath + /ssh)
-    (homeModulesPath + /sxhkd)
-    (homeModulesPath + /themes)
+    (homeModulesPath + /virt)
+    (homeModulesPath + /wine)
+    (homeModulesPath + /xfce)
   ];
 }

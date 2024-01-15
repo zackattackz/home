@@ -16,7 +16,7 @@ in
     users.users.zaha = mkIf cfg.zaha.enable {
       isNormalUser = true;
       description = "Zachary Hanham - personal";
-      extraGroups = [ "networkmanager" "wheel" "realtime" ];
+      extraGroups = [ "atlasvpn" "networkmanager" "wheel" "realtime" ];
     };
     users.users.zaha-odoo = mkIf cfg.zaha-odoo.enable {
       isNormalUser = true;

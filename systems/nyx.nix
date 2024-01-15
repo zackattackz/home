@@ -12,6 +12,8 @@ with lib;
     accounts.zaha.enable = true;
     accounts.zaha-odoo.enable = true;
 
+    atlasvpn.enable = true;
+
     avahi.enable = true;
 
     bluetooth.enable = true;
@@ -20,9 +22,9 @@ with lib;
     bootloader.enableCryptoKeyfile = true;
 
     docker.enable = true;
-    
-    gnome-keyring.enable = true;
 
+    gamemode.enable = true;
+    
     locale.enable = true;
 
     meta.enable = true;
@@ -37,8 +39,13 @@ with lib;
     pipewire.enable = true;
     postgres.enable = true;
 
+    virt.enable = true;
+
     waydroid.enable = true;
 
     xserver.enable = true;
+
+    xfce.enable = true;
+
   };
 }
