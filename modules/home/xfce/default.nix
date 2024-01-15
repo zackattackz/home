@@ -28,11 +28,22 @@ in
           gtk-application-prefer-dark-theme=1
         '';
       };
+      cursorTheme = {
+         name = "Adwaita";
+         package = pkgs.gnome.adwaita-icon-theme;
+         size = 16;
+      };
     };
     qt = {
       enable = true;
       platformTheme = "gtk3";
       style.name = "Adwaita-dark";
+    };
+    home.pointerCursor = {
+        x11.enable = true;
+        package = pkgs.gnome.adwaita-icon-theme;
+        name = "Adwaita";
+        size = 16;
     };
     dconf = {
       enable = true;
