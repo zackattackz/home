@@ -10,6 +10,7 @@
     (homeModulesPath + /meta)
     (homeModulesPath + /neovim)
     (homeModulesPath + /odoo)
+    (homeModulesPath + /redshift)
     (homeModulesPath + /shell)
     (homeModulesPath + /ssh)
     (homeModulesPath + /virt)

@@ -22,6 +22,8 @@ with lib;
 
     neovim.enable = true;
 
+    redshift.enable = true;
+
     shell.enable = true;
 
     ssh.enable = true;
