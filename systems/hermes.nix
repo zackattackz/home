@@ -20,6 +20,8 @@ with lib;
     bootloader.enable = true;
 
     docker.enable = true;
+
+    geoclue2.enable = true;
     
     locale.enable = true;
 

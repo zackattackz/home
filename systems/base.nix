@@ -10,6 +10,7 @@
     (systemModulesPath + /bootloader)
     (systemModulesPath + /docker)
     (systemModulesPath + /gamemode)
+    (systemModulesPath + /geoclue2)
     (systemModulesPath + /locale)
     (systemModulesPath + /meta)
     (systemModulesPath + /network)

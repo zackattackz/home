@@ -25,6 +25,8 @@ with lib;
 
     gamemode.enable = true;
     
+    geoclue2.enable = true;
+    
     locale.enable = true;
 
     meta.enable = true;
