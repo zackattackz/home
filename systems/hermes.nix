@@ -30,6 +30,8 @@ with lib;
     network.enable = true;
     network.hostName = "hermes";
 
+    nix-ld.enable = true;
+
     os.enable = true;
 
     pipewire.enable = true;

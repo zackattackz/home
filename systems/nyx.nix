@@ -34,6 +34,8 @@ with lib;
     network.enable = true;
     network.hostName = "nyx";
 
+    nix-ld.enable = true;
+
     nvidia.enable = true;
 
     os.enable = true;

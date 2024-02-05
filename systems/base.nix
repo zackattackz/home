@@ -14,6 +14,7 @@
     (systemModulesPath + /locale)
     (systemModulesPath + /meta)
     (systemModulesPath + /network)
+    (systemModulesPath + /nix-ld)
     (systemModulesPath + /nvidia)
     (systemModulesPath + /os)
     (systemModulesPath + /pipewire)
