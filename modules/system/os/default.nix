@@ -28,11 +28,6 @@ in
         value = "524288";
       }
       {
-        domain = "zaha-odoo";
-        item = "nofile";
-        value = "524288";
-      }
-      {
         domain = "@realtime";
         item = "rtprio";
         value = "99";

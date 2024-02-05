@@ -45,25 +45,11 @@
           username = "zaha";
         };
       };
-      homeConfigurations."zaha-odoo@nyx" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [ ./users/zaha-odoo.nix ];
-        extraSpecialArgs = homeArgs {
-          username = "zaha-odoo";
-        };
-      };
       homeConfigurations."zaha@hermes" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [ ./users/zaha.nix ];
         extraSpecialArgs = homeArgs {
           username = "zaha";
-        };
-      };
-      homeConfigurations."zaha-odoo@hermes" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [ ./users/zaha-odoo.nix ];
-        extraSpecialArgs = homeArgs {
-          username = "zaha-odoo";
         };
       };
       nixosConfigurations."nyx" = nixpkgs.lib.nixosSystem {

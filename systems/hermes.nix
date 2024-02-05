@@ -9,7 +9,7 @@ with lib;
   ];
 
   config = {
-    accounts.zaha-odoo.enable = true;
+    accounts.zaha.enable = true;
 
     atlasvpn.enable = true;
 
