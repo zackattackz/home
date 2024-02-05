@@ -28,6 +28,7 @@ with lib;
 
     ssh.enable = true;
     ssh.zaha.enable = true;
+    ssh.zaha-odoo.enable = true;
 
     virt.enable = true;
 
