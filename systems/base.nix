@@ -18,6 +18,7 @@
     (systemModulesPath + /nvidia)
     (systemModulesPath + /os)
     (systemModulesPath + /pipewire)
+    (systemModulesPath + /podman)
     (systemModulesPath + /postgres)
     (systemModulesPath + /virt)
     (systemModulesPath + /waydroid)

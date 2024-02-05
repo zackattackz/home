@@ -40,6 +40,9 @@ with lib;
     os.enable = true;
 
     pipewire.enable = true;
+
+    podman.enable = true;
+
     postgres.enable = true;
 
     virt.enable = true;

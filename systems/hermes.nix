@@ -36,6 +36,8 @@ with lib;
 
     pipewire.enable = true;
 
+    podman.enable = true;
+
     postgres.enable = true;
 
     waydroid.enable = true;
