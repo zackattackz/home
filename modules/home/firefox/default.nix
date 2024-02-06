@@ -20,6 +20,10 @@ in
         id = 0;
         settings = commonSettings;
       };
+      profiles.work = {
+        id = 1;
+        settings = commonSettings;
+      };
     };
   };
 }
