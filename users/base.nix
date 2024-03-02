@@ -9,6 +9,7 @@
     (homeModulesPath + /gpg)
     (homeModulesPath + /meta)
     (homeModulesPath + /neovim)
+    (homeModulesPath + /nixvim)
     (homeModulesPath + /odoo)
     (homeModulesPath + /redshift)
     (homeModulesPath + /shell)

@@ -8,10 +8,14 @@
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     snowdoo-support.url = "git+ssh://git@github.com/zaha-odoo/snowdoo-support";
   };
 
-  outputs = { nixpkgs, home-manager, snowdoo-support, ... }:
+  outputs = { nixpkgs, home-manager, nixvim, snowdoo-support, ... }:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
@@ -41,14 +45,14 @@
     in {
       homeConfigurations."zaha@nyx" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        modules = [ ./users/zaha.nix snowdoo-support.homeManagerModules.oe-support ];
+        modules = [ ./users/zaha.nix snowdoo-support.homeManagerModules.oe-support nixvim.homeManagerModules.nixvim ];
         extraSpecialArgs = homeArgs {
           username = "zaha";
         };
       };
       homeConfigurations."zaha@hermes" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        modules = [ ./users/zaha.nix ];
+        modules = [ ./users/zaha.nix nixvim.homeManagerModules.nixvim ];
         extraSpecialArgs = homeArgs {
           username = "zaha";
         };

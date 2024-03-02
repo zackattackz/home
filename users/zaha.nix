@@ -20,7 +20,9 @@ with lib;
 
     meta.enable = true;
 
-    neovim.enable = true;
+    neovim.enable = false;
+
+    nixvim.enable = true;
 
 
     redshift.enable = true;
