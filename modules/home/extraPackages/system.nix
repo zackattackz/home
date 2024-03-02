@@ -34,6 +34,7 @@ in
       libreoffice
       pavucontrol
       qalculate-gtk
+      ripgrep
       # fonts
       noto-fonts
       noto-fonts-cjk
