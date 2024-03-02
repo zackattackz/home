@@ -20,6 +20,7 @@
     (systemModulesPath + /pipewire)
     (systemModulesPath + /podman)
     (systemModulesPath + /postgres)
+    (systemModulesPath + /steam)
     (systemModulesPath + /virt)
     (systemModulesPath + /waydroid)
     (systemModulesPath + /xserver)

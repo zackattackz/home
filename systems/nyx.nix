@@ -45,6 +45,8 @@ with lib;
 
     postgres.enable = true;
 
+    steam.enable = true;
+
     virt.enable = true;
 
     waydroid.enable = true;
