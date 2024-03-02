@@ -47,11 +47,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1707683400,
-        "narHash": "sha256-Zc+J3UO1Xpx+NL8UB6woPHyttEy9cXXtm+0uWwzuYDc=",
+        "lastModified": 1709204054,
+        "narHash": "sha256-U1idK0JHs1XOfSI1APYuXi4AEADf+B+ZU4Wifc0pBHk=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "21b078306a2ab68748abf72650db313d646cf2ca",
+        "rev": "2f3367769a93b226c467551315e9e270c3f78b15",
         "type": "github"
       },
       "original": {
@@ -63,11 +63,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1707546158,
-        "narHash": "sha256-nYYJTpzfPMDxI8mzhQsYjIUX+grorqjKEU9Np6Xwy/0=",
+        "lastModified": 1709237383,
+        "narHash": "sha256-cy6ArO4k5qTx+l5o+0mL9f5fa86tYUX3ozE1S+Txlds=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "d934204a0f8d9198e1e4515dd6fec76a139c87f0",
+        "rev": "1536926ef5621b09bba54035ae2bb6d806d72ac8",
         "type": "github"
       },
       "original": {
@@ -296,10 +296,10 @@
         "snowdoo": "snowdoo"
       },
       "locked": {
-        "lastModified": 1708308337,
-        "narHash": "sha256-E1IvEaMc1ypq6xTnWy4cbQs6/Rs8Ik8QGhYrYwaQl98=",
+        "lastModified": 1708390688,
+        "narHash": "sha256-xyW/TcYcjxoStQL/lhr4aPAomaha2wITlVJGuJkM9qk=",
         "ref": "refs/heads/main",
-        "rev": "5a007ef6b024a0854ae247fc9500b9f152192a8c",
+        "rev": "a6740eddf397083a88749c110646b01e23b43c95",
         "revCount": 2,
         "type": "git",
         "url": "ssh://git@github.com/zaha-odoo/snowdoo-support"

@@ -11,7 +11,7 @@
     snowdoo-support.url = "git+ssh://git@github.com/zaha-odoo/snowdoo-support";
   };
 
-  outputs = { nixpkgs, home-manager, ... }:
+  outputs = { nixpkgs, home-manager, snowdoo-support, ... }:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
@@ -41,7 +41,7 @@
     in {
       homeConfigurations."zaha@nyx" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        modules = [ ./users/zaha.nix ];
+        modules = [ ./users/zaha.nix snowdoo-support.homeManagerModules.oe-support ];
         extraSpecialArgs = homeArgs {
           username = "zaha";
         };
