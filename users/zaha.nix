@@ -9,6 +9,8 @@ with lib;
   
   config = {
 
+    desktop.enable = true;
+
     extraPackages.system.enable = true;
     extraPackages.games.enable = true;
 
@@ -36,8 +38,6 @@ with lib;
     virt.enable = true;
 
     wine.enable = true;
-
-    xfce.enable = true;
 
     oe-config = {
       enable = true;

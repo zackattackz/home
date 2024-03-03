@@ -3,11 +3,11 @@
 with lib;
 
 let
-  cfg = config.xfce;
+  cfg = config.desktop;
 in
 {
-  options.xfce = {
-    enable = mkEnableOption "xfce";
+  options.desktop = {
+    enable = mkEnableOption "desktop";
   };
   config = mkIf cfg.enable {
     gtk = {

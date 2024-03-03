@@ -3,6 +3,7 @@
 
 {
   imports = [
+    (homeModulesPath + /desktop)
     (homeModulesPath + /extraPackages)
     (homeModulesPath + /firefox)
     (homeModulesPath + /git)
@@ -16,6 +17,5 @@
     (homeModulesPath + /ssh)
     (homeModulesPath + /virt)
     (homeModulesPath + /wine)
-    (homeModulesPath + /xfce)
   ];
 }
