@@ -8,6 +8,8 @@
     (systemModulesPath + /avahi)
     (systemModulesPath + /bluetooth)
     (systemModulesPath + /bootloader)
+    (systemModulesPath + /desktop)
+    (systemModulesPath + /displaymanager)
     (systemModulesPath + /docker)
     (systemModulesPath + /gamemode)
     (systemModulesPath + /geoclue2)

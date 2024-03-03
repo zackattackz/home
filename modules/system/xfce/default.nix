@@ -17,28 +17,9 @@ in
           thunar-volman
         ];
       };
-      gnupg.agent = {
-        enable = true;
-        enableSSHSupport = true;
-      };
     };
-    services.xserver = {
-      displayManager = {
-        defaultSession = "xfce";
-        lightdm = {
-          enable = true;
-          greeters.slick = {
-            enable = true;
-            theme.name = "Adwaita-dark";
-          };
-        };
-      };
-      desktopManager.xfce.enable = true;
-    };
-    
-    environment.systemPackages = with pkgs; [
-      blueman
-    ] ++ (with pkgs.xfce; [
+    services.xserver.desktopManager.xfce.enable = true;
+    environment.systemPackages = with pkgs.xfce; [
       catfish
       orage
       xfce4-appfinder
@@ -53,9 +34,6 @@ in
       xfce4-weather-plugin
       xfce4-whiskermenu-plugin
       xfce4-xkb-plugin
-    ]);
-    security.pam.services.gdm.enableGnomeKeyring = true;
-    services.blueman.enable = true;
-    services.gnome.gnome-keyring.enable = true;
+    ];
   };
 }

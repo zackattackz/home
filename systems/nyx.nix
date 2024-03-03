@@ -20,6 +20,10 @@ with lib;
     bootloader.enable = true;
     bootloader.enableCryptoKeyfile = true;
 
+    desktop.enable = true;
+
+    displaymanager.enable = true;
+
     docker.enable = true;
 
     gamemode.enable = true;
