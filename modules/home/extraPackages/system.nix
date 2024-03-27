@@ -12,6 +12,8 @@ in
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
       # applications
+      arandr
+      autorandr
       atlasvpn
       caffeine-ng
       discord
@@ -22,6 +24,7 @@ in
       gnumake
       transmission-gtk
       mpv
+      feh
       ffmpeg-full
       jq
       killall

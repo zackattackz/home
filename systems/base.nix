@@ -27,6 +27,7 @@
     (systemModulesPath + /waydroid)
     (systemModulesPath + /xserver)
     (systemModulesPath + /xfce)
+    (systemModulesPath + /xmonad)
   ];
   nixpkgs.overlays = [ overlay ];
 }

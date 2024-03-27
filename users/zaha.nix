@@ -1,5 +1,5 @@
 
-{ config, lib, pkgs, homeFilesPath, ... }:
+{ config, lib, pkgs, homeFilesPath, system, ... }:
 
 with lib;
 
@@ -8,8 +8,11 @@ with lib;
   imports = [ ./base.nix ];
   
   config = {
+    
+    alacritty.enable = true;
 
     desktop.enable = true;
+    desktop.fontFamily = "Iosevka NFM";
 
     extraPackages.system.enable = true;
     extraPackages.games.enable = true;
@@ -19,6 +22,9 @@ with lib;
     git.enable = true;
 
     gpg.enable = true;
+    
+    i3status-rust.enable = false;
+    i3-sway.enable = false;
 
     meta.enable = true;
 
@@ -26,8 +32,11 @@ with lib;
 
     nixvim.enable = true;
 
+    picom.enable = true;
 
     redshift.enable = true;
+
+    rofi.enable = true;
 
     shell.enable = true;
 
@@ -38,6 +47,8 @@ with lib;
     virt.enable = true;
 
     wine.enable = true;
+
+    xmonad.enable = true;
 
     oe-config = {
       enable = true;

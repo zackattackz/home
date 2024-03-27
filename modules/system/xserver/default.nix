@@ -10,7 +10,9 @@ in
   config = mkIf cfg.enable {
     services.xserver = {
       enable = true;
-      desktopManager.xterm.enable = lib.mkForce false;
+      desktopManager = {
+        xterm.enable = lib.mkForce false;
+      };
       excludePackages = [ pkgs.xterm ];
     };
   };

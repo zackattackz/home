@@ -57,7 +57,9 @@ with lib;
 
     xserver.enable = true;
 
-    xfce.enable = true;
+    xfce.enable = false;
+
+    xmonad.enable = true;
 
   };
 }

@@ -38,7 +38,7 @@ with lib;
 
     podman.enable = true;
 
-    postgres.enable = true;
+    postgres.enable = false;
 
     waydroid.enable = true;
 

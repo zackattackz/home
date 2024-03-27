@@ -9,7 +9,7 @@ in
   options.displaymanager.enable = mkEnableOption "displaymanager";
   config = mkIf cfg.enable {
     services.xserver.displayManager = {
-      defaultSession = "xfce";
+      #defaultSession = "xfce";
       lightdm = {
         enable = true;
         greeters.slick = {

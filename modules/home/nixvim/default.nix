@@ -4,26 +4,67 @@ with lib;
 
 let
   cfg = config.nixvim;
+  colorscheme = "gruvbox";
 in
 {
   options.nixvim.enable = mkEnableOption "nixvim options";
   config = mkIf cfg.enable {
     programs.nixvim = {
       enable = true;
-      colorschemes.kanagawa.enable = true;
+      colorschemes.${colorscheme}.enable = true;
+      viAlias = true;
+      vimAlias = true;
       plugins = {
         direnv.enable = true;
         lightline.enable = true;
         lsp = {
           enable = true;
           servers = {
-            nixd = {
+            bashls = {
+              enable = true;
+            };
+            hls = {
               enable = true;
             };
           };
         };
-        treesitter.enable = true;
+        telescope = {
+          enable = true;
+          highlightTheme = colorscheme;
+          keymaps = {
+            "<leader>fb" = "buffers";
+            "<leader>fg" = "live_grep";
+            "<leader>ff" = "find_files";
+            "<leader>fj" = "jumplist";
+            "<c-p>" = "oldfiles";
+          };
+          extensions = {
+            file_browser = {
+              enable = true;
+            };
+            project-nvim.enable = true;
+            media_files.enable = true;
+          };
+        };
+        treesitter = {
+          enable = true;
+          indent = true;
+        };
         fugitive.enable = true;
+        dashboard = {
+          enable = true;
+        };
+        project-nvim = {
+          enable = true;
+        };
+        coq-nvim = {
+          enable = true;
+          autoStart = true;
+          recommendedKeymaps = true;
+        };
+        copilot-lua = {
+          enable = true;
+        };
       };
       options = {
         autoindent = true;
@@ -33,8 +74,25 @@ in
         number = true;
         relativenumber = true;
       };
+      keymaps = [
+        {
+          mode = "n";
+          key = " ";
+          action = "<NOP>";
+        }
+        {
+          mode = "n";
+          key = "<leader>ft";
+          action = ":Telescope file_browser<CR>";
+        }
+        {
+          mode = "n";
+          key = "<leader>fp";
+          action = ":Telescope projects<CR>";
+        }
+      ];
       globals = {
-        mapleader = "<SPC>";
+        mapleader = " ";
       };
     };
   };

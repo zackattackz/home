@@ -8,6 +8,9 @@ in
 {
   options.desktop = {
     enable = mkEnableOption "desktop";
+    fontFamily = mkOption {
+      type = types.str;
+    };
   };
   config = mkIf cfg.enable {
     gtk = {
@@ -19,14 +22,10 @@ in
         name = "Adwaita-dark";
       };
       gtk3.extraConfig = {
-        Settings = ''
-          gtk-application-prefer-dark-theme=1
-        '';
+        gtk-application-prefer-dark-theme=1;
       };
       gtk4.extraConfig = {
-        Settings = ''
-          gtk-application-prefer-dark-theme=1
-        '';
+        gtk-application-prefer-dark-theme=1;
       };
       cursorTheme = {
          name = "Adwaita";
@@ -48,6 +47,20 @@ in
     dconf = {
       enable = true;
       settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
+    };
+    fonts.fontconfig.enable = true;
+    services.blueman-applet.enable = true;
+    services.dunst = {
+      enable = true;
+      settings = {
+        global = {
+          #transparency = 50;
+          frame_width = 2;
+          separator_height = 2;
+          separator_color = "frame";
+          font = "${cfg.fontFamily} 11";
+        };
+      };
     };
   };
 }

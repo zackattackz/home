@@ -21,11 +21,11 @@ in
         {
           name = "zaha";
           ensureDBOwnership = true;
-          ensurePermissions = {
-            "ALL TABLES IN SCHEMA public" = "ALL PRIVILEGES";
-            "SCHEMA public" = "USAGE";
-            "FUNCTION pg_stat_file(text)" = "EXECUTE";
-          };
+          #ensurePermissions = {
+            #"ALL TABLES IN SCHEMA public" = "ALL PRIVILEGES";
+            #"SCHEMA public" = "USAGE";
+            #"FUNCTION pg_stat_file(text)" = "EXECUTE";
+          #};
           ensureClauses.createdb = true;
         }
       ];

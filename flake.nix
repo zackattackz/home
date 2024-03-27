@@ -24,8 +24,7 @@
         config.allowUnfreePredicate = pkg: true;
         overlays = [ overlay ];
       };
-      homeArgs = { username, ... }: {
-        inherit username;
+      homeArgs = {
         homeFilesPath = ./files/home;
         homeModulesPath = ./modules/home;
       };
@@ -42,19 +41,24 @@
       overlay = final: prev: {
         atlasvpn = import ./pkgs/applications/networking/atlasvpn { inherit maintainers; } pkgs;
       };
+      supportedSystems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
+      forEachSupportedSystem = f: nixpkgs.lib.genAttrs supportedSystems (system: f {
+        pkgs = import nixpkgs { inherit system; };
+      });
     in {
       homeConfigurations."zaha@nyx" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [ ./users/zaha.nix snowdoo-support.homeManagerModules.oe-support nixvim.homeManagerModules.nixvim ];
-        extraSpecialArgs = homeArgs {
+        extraSpecialArgs = homeArgs // {
           username = "zaha";
         };
       };
       homeConfigurations."zaha@hermes" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [ ./users/zaha.nix nixvim.homeManagerModules.nixvim ];
-        extraSpecialArgs = homeArgs {
+        extraSpecialArgs = homeArgs // {
           username = "zaha";
+          system = "hermes";
         };
       };
       nixosConfigurations."nyx" = nixpkgs.lib.nixosSystem {
@@ -67,5 +71,10 @@
         modules = [ ./systems/hermes.nix ];
         specialArgs = systemArgs;
       };
+      devShells = forEachSupportedSystem ({ pkgs }: {
+        default = pkgs.mkShell {
+          packages = with pkgs; [ ghc ];
+        };
+      });
     };
 }
