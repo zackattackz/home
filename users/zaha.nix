@@ -28,6 +28,8 @@ with lib;
 
     meta.enable = true;
 
+    mpd.enable = true;
+
     neovim.enable = false;
 
     nixvim.enable = true;

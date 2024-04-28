@@ -14,6 +14,7 @@ with lib;
     (homeModulesPath + /i3status-rust)
     (homeModulesPath + /i3-sway)
     (homeModulesPath + /meta)
+    (homeModulesPath + /mpd)
     (homeModulesPath + /neovim)
     (homeModulesPath + /nixvim)
     (homeModulesPath + /odoo)
