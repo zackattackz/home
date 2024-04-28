@@ -26,9 +26,9 @@ in
       LC_TIME = "en_US.UTF-8";
     };
 
-    services.xserver = {
+    services.xserver.xkb = {
       layout = "us";
-      xkbVariant = "";
+      variant = "";
     };
   };
 }

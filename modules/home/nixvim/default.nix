@@ -39,11 +39,10 @@ in
             "<c-p>" = "oldfiles";
           };
           extensions = {
-            file_browser = {
+            file-browser = {
               enable = true;
             };
-            project-nvim.enable = true;
-            media_files.enable = true;
+            media-files.enable = true;
           };
         };
         treesitter = {
@@ -56,17 +55,18 @@ in
         };
         project-nvim = {
           enable = true;
+          enableTelescope = true;
         };
         coq-nvim = {
           enable = true;
-          autoStart = true;
-          recommendedKeymaps = true;
+          settings.auto_start = true;
+          settings.keymap.recommended = true;
         };
         copilot-lua = {
           enable = true;
         };
       };
-      options = {
+      opts = {
         autoindent = true;
         expandtab = true;
         tabstop = 2;
