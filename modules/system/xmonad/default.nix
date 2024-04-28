@@ -10,8 +10,8 @@ in
     enable = mkEnableOption "xmonad";
   };
   config = mkIf cfg.enable {
+    services.displayManager.defaultSession = "xmonad";
     services.xserver = {
-      displayManager.defaultSession = "xmonad";
       desktopManager.session = [{
         name = "xmonad";
         start = ''

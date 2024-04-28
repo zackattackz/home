@@ -12,17 +12,19 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    xmonad.url = "github:xmonad/xmonad";
+    xmonad-contrib.url = "github:liskin/xmonad-contrib/steam-fixes"; # "github:xmonad/xmonad-contrib";
     snowdoo-support.url = "git+ssh://git@github.com/zaha-odoo/snowdoo-support";
   };
 
-  outputs = { nixpkgs, home-manager, nixvim, snowdoo-support, ... }:
+  outputs = { nixpkgs, home-manager, nixvim, snowdoo-support, xmonad, xmonad-contrib, ... }:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
         inherit system;
         config.allowUnfree = true;
         config.allowUnfreePredicate = pkg: true;
-        overlays = [ overlay ];
+        overlays = [ overlay xmonad.overlay xmonad-contrib.overlay ];
       };
       homeArgs = {
         homeFilesPath = ./files/home;

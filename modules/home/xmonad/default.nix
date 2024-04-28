@@ -18,8 +18,15 @@ in
     xsession.profilePath = ".xprofile-xmonad";
     xsession.windowManager.xmonad = {
       enable = true;
-      enableContribAndExtras = true;
+      # enableContribAndExtras = true;
+      extraPackages = haskellPackages: [
+        haskellPackages.xmonad-contrib
+      ];
       config = ./xmonad.hs;
+    };
+    programs.xmobar = {
+      enable = true;
+      extraConfig = lib.readFile ./xmobarrc;
     };
   };
 }

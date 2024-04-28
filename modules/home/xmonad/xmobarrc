@@ -5,12 +5,15 @@ Config
   , borderWidth = 3
   , bgColor     = "#222"
   , fgColor     = "grey"
-  , position    = TopSize C 99 30
+  , position    = TopSize C 100 30
+  , lowerOnStart = True
+  , overrideRedirect = True
   , commands    =
-      [ Run Date "date: <fc=#4eb4fa>%a %d %b %Y %H:%M:%S </fc>" "date" 10
+      [ Run Date "<fc=#4eb4fa>%a %d %b %Y %H:%M:%S </fc>" "date" 10
       , Run StdinReader
+      , Run XPropertyLog "_XMONAD_TRAYPAD"
       ]
   , sepChar     = "%"
   , alignSep    = "}{"
-  , template    = "  %StdinReader% }{%date%  "
+  , template    = "  %StdinReader% }{%date% %_XMONAD_TRAYPAD%"
   }
