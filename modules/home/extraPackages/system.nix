@@ -35,6 +35,7 @@ in
       zip
       evince
       libreoffice
+      trayer
       pavucontrol
       qalculate-gtk
       ripgrep

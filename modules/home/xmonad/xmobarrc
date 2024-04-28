@@ -1,0 +1,16 @@
+Config
+  { font        = "Iosevka"
+  , borderColor = "#d0d0d0"
+  , border      = FullB
+  , borderWidth = 3
+  , bgColor     = "#222"
+  , fgColor     = "grey"
+  , position    = TopSize C 99 30
+  , commands    =
+      [ Run Date "date: <fc=#4eb4fa>%a %d %b %Y %H:%M:%S </fc>" "date" 10
+      , Run StdinReader
+      ]
+  , sepChar     = "%"
+  , alignSep    = "}{"
+  , template    = "  %StdinReader% }{%date%  "
+  }
