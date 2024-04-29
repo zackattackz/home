@@ -4,6 +4,8 @@ import XMonad.Util.EZConfig (mkKeymap, checkKeymap)
 import XMonad.Actions.Navigation2D
 import XMonad.Actions.CycleWS
 import XMonad.Hooks.EwmhDesktops
+import XMonad.Layout.MultiToggle
+import XMonad.Layout.MultiToggle.Instances
 import XMonad.Layout.PerWorkspace
 import XMonad.Layout.ThreeColumns
 import XMonad.Layout.Grid
@@ -21,7 +23,7 @@ myLayout =
   -- onWorkspace "games" steamLayout
   baseLayout
   where
-    baseLayout = (avoidStruts . smartBorders $ threeCol ||| tiled ||| Mirror tiled) ||| smartBorders Full
+    baseLayout = mkToggle (single NBFULL) (avoidStruts . smartBorders $ threeCol ||| tiled ||| Mirror tiled) 
     -- steamLayout = smartBorders . avoidStruts $ withIM (2%3) (ClassName "steam") Grid ||| Full
     threeCol = ThreeColMid nmaster delta ratio
     tiled    = Tall nmaster delta ratio
@@ -38,6 +40,7 @@ myKeymap c =
   -- window management
   , ("M-r" , refresh)
   , ("M-t" , sendMessage NextLayout)
+  , ("M-y" , sendMessage $ Toggle NBFULL)
   , ("M-s" , withFocused $ windows . sink)
   , ("M-q" , kill)
   -- window movement
