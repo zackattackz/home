@@ -5,7 +5,7 @@
     # Specify the source of Home Manager and Nixpkgs.
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
-      url = "github:nix-community/home-manager/master";
+      url = "github:zackattackz/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixvim = {
@@ -13,11 +13,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     xmonad.url = "github:xmonad/xmonad";
-    xmonad-contrib.url = "github:liskin/xmonad-contrib/steam-fixes"; # "github:xmonad/xmonad-contrib";
+    xmonad-contrib.url = "github:xmonad/xmonad-contrib"; # "github:xmonad/xmonad-contrib";
     snowdoo-support.url = "git+ssh://git@github.com/zaha-odoo/snowdoo-support";
+    stylix.url = "github:danth/stylix";
   };
 
-  outputs = { nixpkgs, home-manager, nixvim, snowdoo-support, xmonad, xmonad-contrib, ... }:
+  outputs = { nixpkgs, home-manager, nixvim, snowdoo-support, xmonad, xmonad-contrib, stylix, ... }:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
@@ -29,10 +30,12 @@
       homeArgs = {
         homeFilesPath = ./files/home;
         homeModulesPath = ./modules/home;
+        stylix-image = ./files/wallpaper.jpg;
       };
       systemArgs = {
         inherit overlay;
         systemModulesPath = ./modules/system;
+        stylix-image = ./files/wallpaper.jpg;
       };
       maintainers.zackattackz = {
         email = "z@zmhanham.com";
@@ -41,7 +44,7 @@
         name = "Zachary Hanham";
       };
       overlay = final: prev: {
-        atlasvpn = import ./pkgs/applications/networking/atlasvpn { inherit maintainers; } pkgs;
+        # atlasvpn = import ./pkgs/applications/networking/atlasvpn { inherit maintainers; } pkgs;
       };
       supportedSystems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
       forEachSupportedSystem = f: nixpkgs.lib.genAttrs supportedSystems (system: f {
@@ -50,7 +53,7 @@
     in {
       homeConfigurations."zaha@nyx" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        modules = [ ./users/zaha.nix snowdoo-support.homeManagerModules.oe-support nixvim.homeManagerModules.nixvim ];
+        modules = [ ./users/zaha.nix snowdoo-support.homeManagerModules.oe-support nixvim.homeManagerModules.nixvim stylix.homeManagerModules.stylix ];
         extraSpecialArgs = homeArgs // {
           username = "zaha";
         };
@@ -65,7 +68,7 @@
       };
       nixosConfigurations."nyx" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        modules = [ ./systems/nyx.nix ];
+        modules = [ ./systems/nyx.nix stylix.nixosModules.stylix ];
         specialArgs = systemArgs;
       };
       nixosConfigurations."hermes" = nixpkgs.lib.nixosSystem {

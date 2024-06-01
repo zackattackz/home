@@ -11,8 +11,6 @@ with lib;
   config = {
     accounts.zaha.enable = true;
 
-    atlasvpn.enable = true;
-
     avahi.enable = true;
 
     bluetooth.enable = true;

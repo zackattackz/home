@@ -1,11 +1,12 @@
 
-{config, lib, pkgs, homeModulesPath, system, ...}:
+{config, lib, pkgs, homeModulesPath, system, stylix-image, ...}:
 
 with lib;
 
 {
   imports = [
     (homeModulesPath + /alacritty)
+    (homeModulesPath + /autorandr)
     (homeModulesPath + /desktop)
     (homeModulesPath + /extraPackages)
     (homeModulesPath + /firefox)
@@ -19,6 +20,7 @@ with lib;
     (homeModulesPath + /nixvim)
     (homeModulesPath + /odoo)
     (homeModulesPath + /picom)
+    (homeModulesPath + /polybar)
     (homeModulesPath + /redshift)
     (homeModulesPath + /rofi)
     (homeModulesPath + /shell)
@@ -27,4 +29,37 @@ with lib;
     (homeModulesPath + /wine)
     (homeModulesPath + /xmonad)
   ];
+  stylix.image = stylix-image;
+  stylix.polarity = "dark";
+  stylix.opacity.terminal = 0.83;
+  stylix.cursor = {
+    package = pkgs.bibata-cursors;
+    name = "Bibata-Original-Amber";
+    size = 24;
+  };
+  stylix.fonts = {
+    serif = {
+      package = pkgs.dejavu_fonts;
+      name = "DejaVu Serif";
+    };
+
+    sansSerif = {
+      package = pkgs.dejavu_fonts;
+      name = "DejaVu Sans";
+    };
+
+    monospace = {
+      package = pkgs.nerdfonts.override {
+        fonts = [
+          "Iosevka"
+        ];
+      };
+      name = "Iosevka NFM";
+    };
+
+    emoji = {
+      package = pkgs.noto-fonts-emoji;
+      name = "Noto Color Emoji";
+    };
+  };
 }

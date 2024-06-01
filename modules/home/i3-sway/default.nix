@@ -6,7 +6,6 @@ let
   base-cfg = config.xsession.windowManager.i3;
   cfg = config.i3-sway;
   i3status-rust-cfg-file = "${config.xdg.configHome}/i3status-rust/config-default.toml";
-  fontFamily = config.desktop.fontFamily;
 in
 {
   options.i3-sway = {
@@ -23,22 +22,35 @@ in
         menu = "${pkgs.rofi}/bin/rofi -show drun";
         modifier = "Mod4";
         focus.followMouse = false;
-        bars = [{
-          mode = "dock";
-          hiddenState = "hide";
-          position = "top";
-          workspaceButtons = true;
-          workspaceNumbers = true;
-          statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ${i3status-rust-cfg-file}";
-          fonts = {
-            names = [ fontFamily ];
-            size = 10.0;
-          };
-          trayOutput = "primary";
-          #extraConfig = ''
-            #output 
-          #'';
-        }];
+        window.titlebar = false;
+        floating.titlebar = true;
+        bars = [
+          ({
+            position = "top";
+            statusCommand = "i3status-rs ${i3status-rust-cfg-file}";
+            workspaceButtons = true;
+            workspaceNumbers = true;
+          } // config.lib.stylix.i3.bar)
+        ];
+        startup = [
+          { command = "autorandr --cycle # ;  systemctl --user restart polybar"; always = true; notification = false; }
+        ];
+        #bars = [{
+        #  mode = "dock";
+        #  hiddenState = "hide";
+        #  position = "top";
+        #  workspaceButtons = true;
+        #  workspaceNumbers = true;
+        #  statusCommand = "${pkgs.polybar}/bin/polybar main";
+        #  # fonts = {
+        #    # names = [ fontFamily ];
+        #    # size = 10.0;
+        #  # };
+        #  trayOutput = "primary";
+        #  #extraConfig = ''
+        #    #output 
+        #  #'';
+        #}];
         keybindings = mkDefault {
           "${base-cfg.config.modifier}+Return" = "exec ${base-cfg.config.terminal}";
           "${base-cfg.config.modifier}+q" = "kill";
@@ -57,14 +69,19 @@ in
 
           "${base-cfg.config.modifier}+c" = "split h";
           "${base-cfg.config.modifier}+v" = "split v";
-          "mod1+F11" = "fullscreen toggle";
-          "${base-cfg.config.modifier}+F5" = "exec bash -c '[[ $(systemctl --user is-active picom) == \"active\" ]] && systemctl --user stop picom || systemctl --user start picom'";
+          "${base-cfg.config.modifier}+y" = "fullscreen toggle";
+          "${base-cfg.config.modifier}+F6" = "exec bash -c '[[ $(systemctl --user is-active picom) == \"active\" ]] && systemctl --user stop picom || systemctl --user start picom'";
+          "${base-cfg.config.modifier}+F5" = "exec \"bash -c 'autorandr --cycle # ; systemctl --user restart polybar'\"";
+          "Mod1+Tab" = "exec rofi -show window";
+          "XF86AudioRaiseVolume" = "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ --limit 1.0";
+          "XF86AudioLowerVolume" = "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%- --limit 1.0";
+          "XF86AudioMute" = "exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
           "${base-cfg.config.modifier}+i" = "layout stacking";
           "${base-cfg.config.modifier}+o" = "layout tabbed";
           "${base-cfg.config.modifier}+p" = "layout toggle split";
 
-          "${base-cfg.config.modifier}+u" = "floating toggle";
-          "${base-cfg.config.modifier}+y" = "focus mode_toggle";
+          "${base-cfg.config.modifier}+s" = "floating toggle";
+          "${base-cfg.config.modifier}+x" = "focus mode_toggle";
 
           "${base-cfg.config.modifier}+n" = "focus parent";
 
@@ -90,11 +107,9 @@ in
           
           "${base-cfg.config.modifier}+Shift+c" = "reload";
           "${base-cfg.config.modifier}+Shift+r" = "restart";
-          "${base-cfg.config.modifier}+Shift+e" =
-            "exec i3-nagbar -t warning -m 'Do you want to exit i3?' -b 'Yes' 'i3-msg exit'";
+          "${base-cfg.config.modifier}+Shift+q" = "exit";
 
           "${base-cfg.config.modifier}+r" = "mode resize";
-          "${base-cfg.config.modifier}+F6" = "exec rofi-arandr";
         };
       };
     };

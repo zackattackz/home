@@ -4,14 +4,13 @@ with lib;
 
 let
   cfg = config.nixvim;
-  colorscheme = "gruvbox";
 in
 {
   options.nixvim.enable = mkEnableOption "nixvim options";
   config = mkIf cfg.enable {
     programs.nixvim = {
       enable = true;
-      colorschemes.${colorscheme}.enable = true;
+      # colorschemes.${colorscheme}.enable = true;
       viAlias = true;
       vimAlias = true;
       plugins = {
@@ -30,7 +29,7 @@ in
         };
         telescope = {
           enable = true;
-          highlightTheme = colorscheme;
+          # highlightTheme = colorscheme;
           keymaps = {
             "<leader>fb" = "buffers";
             "<leader>fg" = "live_grep";

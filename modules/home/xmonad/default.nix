@@ -4,7 +4,7 @@ with lib;
 
 let
   cfg = config.xmonad;
-  fontFamily = config.desktop.fontFamily;
+  # fontFamily = config.desktop.fontFamily;
 in
 {
   options.xmonad = {

@@ -4,14 +4,14 @@ with lib;
 
 let
   cfg = config.rofi;
-  fontFamily = config.desktop.fontFamily;
+  #fontFamily = config.desktop.fontFamily;
 in
 {
   options.rofi.enable = mkEnableOption "rofi options";
   config = mkIf cfg.enable {
     programs.rofi = {
       enable = true;
-      font = "${fontFamily} 13";
+      #font = "${fontFamily} 13";
       extraConfig = {
         kb-row-up = "Up,Control+k,ISO_Left_Tab";
         kb-row-down = "Down,Control+j,Tab";

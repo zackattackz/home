@@ -11,8 +11,6 @@ with lib;
   config = {
     accounts.zaha.enable = true;
 
-    atlasvpn.enable = true;
-
     avahi.enable = true;
 
     bluetooth.enable = true;
@@ -29,6 +27,8 @@ with lib;
     gamemode.enable = true;
     
     geoclue2.enable = true;
+
+    i3-sway.enable = true;
     
     locale.enable = true;
 
@@ -59,7 +59,7 @@ with lib;
 
     xfce.enable = false;
 
-    xmonad.enable = true;
+    xmonad.enable = false;
 
   };
 }

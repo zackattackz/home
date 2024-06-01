@@ -15,7 +15,7 @@ in
     users.users.zaha = mkIf cfg.zaha.enable {
       isNormalUser = true;
       description = "Zachary Hanham - personal";
-      extraGroups = [ "atlasvpn" "networkmanager" "wheel" "realtime" ];
+      extraGroups = [ "networkmanager" "wheel" "realtime" ];
     };
   };
 }

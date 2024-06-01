@@ -1,10 +1,9 @@
 
-{config, lib, pkgs, systemModulesPath, overlay, ...}:
+{config, lib, pkgs, systemModulesPath, overlay, stylix-image, ...}:
 
 {
   imports = [
     (systemModulesPath + /accounts)
-    (systemModulesPath + /atlasvpn)
     (systemModulesPath + /avahi)
     (systemModulesPath + /bluetooth)
     (systemModulesPath + /bootloader)
@@ -13,6 +12,7 @@
     (systemModulesPath + /docker)
     (systemModulesPath + /gamemode)
     (systemModulesPath + /geoclue2)
+    (systemModulesPath + /i3-sway)
     (systemModulesPath + /locale)
     (systemModulesPath + /meta)
     (systemModulesPath + /network)
@@ -30,4 +30,36 @@
     (systemModulesPath + /xmonad)
   ];
   nixpkgs.overlays = [ overlay ];
+  stylix.image = stylix-image;
+  stylix.polarity = "dark";
+  stylix.cursor = {
+    package = pkgs.bibata-cursors;
+    name = "Bibata-Original-Amber";
+    size = 24;
+  };
+  stylix.fonts = {
+    serif = {
+      package = pkgs.dejavu_fonts;
+      name = "DejaVu Serif";
+    };
+
+    sansSerif = {
+      package = pkgs.dejavu_fonts;
+      name = "DejaVu Sans";
+    };
+
+    monospace = {
+      package = pkgs.nerdfonts.override {
+        fonts = [
+          "Iosevka"
+        ];
+      };
+      name = "Iosevka NFM";
+    };
+
+    emoji = {
+      package = pkgs.noto-fonts-emoji;
+      name = "Noto Color Emoji";
+    };
+  };
 }

@@ -11,8 +11,13 @@ with lib;
     
     alacritty.enable = true;
 
+    autorandr = {
+      enable = true;
+      machine = "nyx";
+    };
+
     desktop.enable = true;
-    desktop.fontFamily = "Iosevka NFM";
+    # desktop.fontFamily = "Iosevka NFM";
 
     extraPackages.system.enable = true;
     extraPackages.games.enable = true;
@@ -23,8 +28,8 @@ with lib;
 
     gpg.enable = true;
     
-    i3status-rust.enable = false;
-    i3-sway.enable = false;
+    i3status-rust.enable = true;
+    i3-sway.enable = true;
 
     meta.enable = true;
 
@@ -36,7 +41,9 @@ with lib;
 
     picom.enable = true;
 
-    redshift.enable = true;
+    polybar.enable = false;
+
+    redshift.enable = false;
 
     rofi.enable = true;
 
@@ -50,7 +57,7 @@ with lib;
 
     wine.enable = true;
 
-    xmonad.enable = true;
+    xmonad.enable = false;
 
     oe-config = {
       enable = true;

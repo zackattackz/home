@@ -13,8 +13,6 @@ in
     home.packages = with pkgs; [
       # applications
       arandr
-      autorandr
-      atlasvpn
       caffeine-ng
       discord
       element-desktop
@@ -40,16 +38,8 @@ in
       qalculate-gtk
       ripgrep
       # fonts
-      noto-fonts
+      siji
       noto-fonts-cjk
-      noto-fonts-emoji
-      (nerdfonts.override { fonts = [
-        "FiraCode"
-        "Iosevka"
-        "Hack"
-        "FantasqueSansMono"
-        "ProggyClean"
-      ]; })
     ];
   };
 }

@@ -12,3 +12,12 @@ home:
 
 news:
 	home-manager news --flake "$(ROOT_DIR)"
+
+gen:
+	nix-env --list-generations
+
+gen-home:
+	home-manager generations
+
+# home-manager remove-generations $(seq n m)
+# sudo nix-env --delete-generations old

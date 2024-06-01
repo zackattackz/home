@@ -9,13 +9,13 @@ in
   options.displaymanager.enable = mkEnableOption "displaymanager";
   config = mkIf cfg.enable {
     services.xserver.displayManager = {
-      #defaultSession = "xfce";
+      # defaultSession = "xsession-hm";
       lightdm = {
         enable = true;
-        greeters.slick = {
-          enable = true;
-          theme.name = "Adwaita-dark";
-        };
+        # greeters.slick = {
+        #  enable = true;
+        #  theme.name = "Adwaita-dark";
+        #};
       };
     };
   };
