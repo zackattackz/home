@@ -21,5 +21,7 @@ in
 
     networking.networkmanager.enable = true;
     networking.firewall.enable = false;
+    networking.enableIPv6 = false;
+    boot.kernel.sysctl."net.ipv6.conf.enp3s0.disable_ipv6" = true;
   };
 }

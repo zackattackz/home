@@ -52,6 +52,8 @@ with lib;
     steam.enable = true;
 
     virt.enable = true;
+    
+    vpn.enable = true;
 
     waydroid.enable = true;
 

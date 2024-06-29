@@ -30,6 +30,7 @@ with lib;
     (homeModulesPath + /xmonad)
   ];
   stylix.image = stylix-image;
+  stylix.enable = true;
   stylix.polarity = "dark";
   stylix.opacity.terminal = 0.83;
   stylix.cursor = {

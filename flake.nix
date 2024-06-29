@@ -14,11 +14,11 @@
     };
     xmonad.url = "github:xmonad/xmonad";
     xmonad-contrib.url = "github:xmonad/xmonad-contrib"; # "github:xmonad/xmonad-contrib";
-    snowdoo-support.url = "git+ssh://git@github.com/zaha-odoo/snowdoo-support";
+    # snowdoo-support.url = "git+ssh://git@github.com/zaha-odoo/snowdoo-support";
     stylix.url = "github:danth/stylix";
   };
 
-  outputs = { nixpkgs, home-manager, nixvim, snowdoo-support, xmonad, xmonad-contrib, stylix, ... }:
+  outputs = { nixpkgs, home-manager, nixvim, xmonad, xmonad-contrib, stylix, ... }:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
@@ -53,7 +53,12 @@
     in {
       homeConfigurations."zaha@nyx" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        modules = [ ./users/zaha.nix snowdoo-support.homeManagerModules.oe-support nixvim.homeManagerModules.nixvim stylix.homeManagerModules.stylix ];
+        modules = [
+          ./users/zaha.nix
+          # snowdoo-support.homeManagerModules.oe-support
+          nixvim.homeManagerModules.nixvim
+          stylix.homeManagerModules.stylix
+        ];
         extraSpecialArgs = homeArgs // {
           username = "zaha";
         };

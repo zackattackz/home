@@ -13,6 +13,7 @@ in
     home.packages = with pkgs; [
       # applications
       arandr
+      alttab
       caffeine-ng
       discord
       element-desktop

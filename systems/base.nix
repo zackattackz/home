@@ -24,12 +24,14 @@
     (systemModulesPath + /postgres)
     (systemModulesPath + /steam)
     (systemModulesPath + /virt)
+    (systemModulesPath + /vpn)
     (systemModulesPath + /waydroid)
     (systemModulesPath + /xserver)
     (systemModulesPath + /xfce)
     (systemModulesPath + /xmonad)
   ];
   nixpkgs.overlays = [ overlay ];
+  stylix.enable = true;
   stylix.image = stylix-image;
   stylix.polarity = "dark";
   stylix.cursor = {

@@ -59,13 +59,13 @@ with lib;
 
     xmonad.enable = false;
 
-    oe-config = {
-      enable = true;
-      settings = {
-        user = "zaha@odoo.com";
-        src = "${config.home.homeDirectory}/src/odoo/versions";
-        internal = "${config.home.homeDirectory}/src/odoo/internal";
-      };
-    };
+    #oe-config = {
+      #enable = true;
+      #settings = {
+        #user = "zaha@odoo.com";
+        #src = "${config.home.homeDirectory}/src/odoo/versions";
+        #internal = "${config.home.homeDirectory}/src/odoo/internal";
+      #};
+    #};
   };
 }
