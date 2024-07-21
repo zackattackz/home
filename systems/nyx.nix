@@ -57,6 +57,8 @@ with lib;
 
     waydroid.enable = true;
 
+    # wayland.enable = true;
+
     xserver.enable = true;
 
     xfce.enable = false;

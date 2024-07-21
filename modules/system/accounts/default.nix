@@ -14,7 +14,7 @@ in
   config = {
     users.users.zaha = mkIf cfg.zaha.enable {
       isNormalUser = true;
-      description = "Zachary Hanham - personal";
+      description = "Zachary Hanham";
       extraGroups = [ "networkmanager" "wheel" "realtime" ];
     };
   };

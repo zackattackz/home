@@ -28,9 +28,8 @@ with lib;
 
     gpg.enable = true;
     
-    i3status-rust.enable = true;
-    i3-sway.enable = true;
-
+    i3.enable = true;
+    #sway.enable = true;
     meta.enable = true;
 
     mpd.enable = true;

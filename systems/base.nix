@@ -26,6 +26,7 @@
     (systemModulesPath + /virt)
     (systemModulesPath + /vpn)
     (systemModulesPath + /waydroid)
+    (systemModulesPath + /wayland)
     (systemModulesPath + /xserver)
     (systemModulesPath + /xfce)
     (systemModulesPath + /xmonad)
