@@ -10,6 +10,11 @@ in
   config = mkIf cfg.enable {
     programs.steam = {
       enable = true;
+      fontPackages = with pkgs; [
+        corefonts
+        vistafonts
+        source-han-sans
+      ];
     };
     programs.gamescope = {
       enable = true;
