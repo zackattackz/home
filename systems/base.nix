@@ -65,4 +65,5 @@
       name = "Noto Color Emoji";
     };
   };
+  # xdg.portal.enable = true;
 }

@@ -21,3 +21,4 @@ gen-home:
 
 # home-manager remove-generations $(seq n m)
 # sudo nix-env --delete-generations old
+# --profile /nix/var/nix/profiles/system
