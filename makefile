@@ -19,6 +19,9 @@ gen:
 gen-home:
 	home-manager generations
 
+rollback-home:
+	bash $(home-manager generations | fzf | awk -F '-> ' '{print $2 "/activate"}')
+
 # home-manager remove-generations $(seq n m)
 # sudo nix-env --delete-generations old
 # --profile /nix/var/nix/profiles/system
