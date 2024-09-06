@@ -20,12 +20,12 @@ in
       shadowOffsets = [ (-7) (-7) ];
       shadowOpacity = 0.75;
       activeOpacity = 1;
-      inactiveOpacity = 0.81;
+      inactiveOpacity = 1;
       opacityRules = [
         "0:_NET_WM_STATE@:32a *= '_NET_WM_STATE_HIDDEN'"
         "100:class_g = 'firefox' && argb"
         "100:class_g = 'discord'"
-        "100:class_g = 'Alacritty'"
+        #"100:class_g = 'Alacritty'"
         "100:class_g = 'steam'"
       ];
       vSync = true;
@@ -33,12 +33,13 @@ in
         tooltip = {
           fade = true;
           shadow = true;
-          opacity = 0.75;
+          opacity = 1;
           focus = true;
           full-shadow = false;
         };
         dock = {
           shadow = false;
+          opacity = 1;
         };
         utility = {
           shadow = false;
@@ -46,6 +47,7 @@ in
         };
         dnd = {
           shadow = false;
+          opacity = 1;
         };
         popup_menu = {
           opacity = 1;

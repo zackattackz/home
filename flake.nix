@@ -27,15 +27,51 @@
         config.allowUnfreePredicate = pkg: true;
         overlays = [ overlay xmonad.overlay xmonad-contrib.overlay ];
       };
+      stylix-config = {
+        image = ./files/wallpaper.jpg;
+        base16Scheme = import ./files/scheme.nix;
+        enable = true;
+        polarity = "dark";
+        opacity.terminal = 0.83;
+        cursor = {
+          package = pkgs.bibata-cursors;
+          name = "Bibata-Original-Amber";
+          size = 24;
+        };
+        fonts = {
+          serif = {
+            package = pkgs.noto-fonts;
+            name = "Noto Serif";
+          };
+
+          sansSerif = {
+            package = pkgs.noto-fonts;
+            name = "Noto Sans";
+          };
+
+          monospace = {
+            package = pkgs.nerdfonts.override {
+              fonts = [
+                "Iosevka"
+              ];
+            };
+            name = "Iosevka NFM";
+          };
+
+          emoji = {
+            package = pkgs.noto-fonts-emoji;
+            name = "Noto Color Emoji";
+          };
+        };
+      };
       homeArgs = {
+        inherit stylix-config;
         homeFilesPath = ./files/home;
         homeModulesPath = ./modules/home;
-        stylix-image = ./files/wallpaper.jpg;
       };
       systemArgs = {
-        inherit overlay;
+        inherit overlay stylix-config;
         systemModulesPath = ./modules/system;
-        stylix-image = ./files/wallpaper.jpg;
       };
       maintainers.zackattackz = {
         email = "z@zmhanham.com";

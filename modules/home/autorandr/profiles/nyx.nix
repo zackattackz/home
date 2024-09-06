@@ -9,10 +9,10 @@ let
   };
   audio-profiles = {
     "main" = {
-      "alsa_card.pci-0000_01_00.1" = "output:hdmi-stereo";
+      "alsa_card.pci-0000_01_00.1" = "output:hdmi-stereo-extra1";
     };
     "tv" = {
-      "alsa_card.pci-0000_01_00.1" = "output:hdmi-stereo-extra1";
+      "alsa_card.pci-0000_01_00.1" = "output:hdmi-stereo";
     };
   };
   makeHook = profile: hooks: strings.concatLines (map (f: f profile) hooks);

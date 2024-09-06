@@ -1,5 +1,5 @@
 
-{config, lib, pkgs, homeModulesPath, system, stylix-image, ...}:
+{config, lib, pkgs, homeModulesPath, system, stylix-config, ...}:
 
 with lib;
 
@@ -29,38 +29,5 @@ with lib;
     (homeModulesPath + /wine)
     (homeModulesPath + /xmonad)
   ];
-  stylix.image = stylix-image;
-  stylix.enable = true;
-  stylix.polarity = "dark";
-  stylix.opacity.terminal = 0.83;
-  stylix.cursor = {
-    package = pkgs.bibata-cursors;
-    name = "Bibata-Original-Amber";
-    size = 24;
-  };
-  stylix.fonts = {
-    serif = {
-      package = pkgs.noto-fonts;
-      name = "Noto Serif";
-    };
-
-    sansSerif = {
-      package = pkgs.noto-fonts;
-      name = "Noto Sans";
-    };
-
-    monospace = {
-      package = pkgs.nerdfonts.override {
-        fonts = [
-          "Iosevka"
-        ];
-      };
-      name = "Iosevka NFM";
-    };
-
-    emoji = {
-      package = pkgs.noto-fonts-emoji;
-      name = "Noto Color Emoji";
-    };
-  };
+  stylix = stylix-config;
 }

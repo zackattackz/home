@@ -15,7 +15,7 @@ in
       arandr
       alttab
       caffeine-ng
-      discord
+      vesktop
       element-desktop
       gnome.seahorse
       gnome.gnome-disk-utility
