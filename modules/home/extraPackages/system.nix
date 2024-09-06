@@ -29,7 +29,6 @@ in
       killall
       tldr
       unzip
-      vscode
       xclip
       zip
       evince
@@ -41,6 +40,20 @@ in
       # fonts
       siji
       noto-fonts-cjk
+      (vscode-with-extensions.override {
+        vscodeExtensions = with vscode-extensions; [
+          ms-python.python
+          ms-python.debugpy
+          ms-python.black-formatter
+          ms-python.vscode-pylance
+          ms-python.isort
+          ms-azuretools.vscode-docker
+          ms-vscode-remote.remote-ssh
+          mkhl.direnv
+          golang.go
+          bbenoist.nix
+        ];
+      })
     ];
   };
 }
