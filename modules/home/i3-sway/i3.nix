@@ -29,6 +29,7 @@ in
         startup = [
           { command = "autorandr --cycle"; notification = false; }
           { command = "alttab -d 2 -sc 1"; notification = false; }
+          { command = "dbus-update-activation-environment --all"; notification = false; }
         ];
       };
     };
