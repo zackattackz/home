@@ -28,7 +28,7 @@ in
         #"100:class_g = 'Alacritty'"
         "100:class_g = 'steam'"
       ];
-      vSync = true;
+      vSync = false;
       wintypes = {
         tooltip = {
           fade = true;
@@ -73,6 +73,9 @@ in
         detect-transient = true;
         detect-client-leader = true;
         use-damage = true;
+        use-ewmh-active-win = true;
+        unredir-if-possible = true;
+        glx-no-rebind-pixmap = true;
         xrender-sync-fence = true;
       };
     };
