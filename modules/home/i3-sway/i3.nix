@@ -18,7 +18,7 @@ in
     xsession.enable = true;
     xsession.scriptPath = ".xsession-hm";
     xsession.profilePath = ".xprofile-hm";
-    i3-sway.menu = "${pkgs.rofi}/bin/rofi -show drun";
+    i3-sway.menu = "${pkgs.rofi}/bin/rofi -show drun -show-icons";
     xsession.windowManager.i3 = {
       enable = true;
       config = {
