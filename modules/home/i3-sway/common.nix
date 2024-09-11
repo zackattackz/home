@@ -44,7 +44,7 @@ let
         "${cfg.modifier}+v" = "split v";
         "${cfg.modifier}+y" = "fullscreen toggle";
         "${cfg.modifier}+F6" = "exec bash -c '[[ $(systemctl --user is-active picom) == \"active\" ]] && systemctl --user stop picom || systemctl --user start picom'";
-        "${cfg.modifier}+F5" = "exec \"bash -c 'autorandr --cycle'\"";
+        "${cfg.modifier}+F5" = "exec \"bash -c 'autorandr --cycle; ${pkgs.feh}/bin/feh --bg-center ${../../../files/wallpaper.jpg}'\"";
         "XF86AudioRaiseVolume" = "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ --limit 1.0";
         "XF86AudioLowerVolume" = "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%- --limit 1.0";
         "XF86AudioMute" = "exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
