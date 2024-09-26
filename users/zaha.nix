@@ -53,6 +53,8 @@ with lib;
     ssh.zaha-odoo.enable = true;
 
     virt.enable = true;
+    
+    vscode.enable = true;
 
     wine.enable = true;
 

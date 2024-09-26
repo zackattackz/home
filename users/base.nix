@@ -26,6 +26,7 @@ with lib;
     (homeModulesPath + /shell)
     (homeModulesPath + /ssh)
     (homeModulesPath + /virt)
+    (homeModulesPath + /vscode)
     (homeModulesPath + /wine)
     (homeModulesPath + /xmonad)
   ];
