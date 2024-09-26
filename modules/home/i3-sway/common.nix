@@ -22,7 +22,12 @@ let
             bindsym button6 nop
             bindsym button7 nop
           '';
-        } // config.lib.stylix.i3.bar)
+        } // config.lib.stylix.i3.bar // {
+          fonts = {
+            inherit (config.lib.stylix.i3.bar.fonts) size;
+            names = config.lib.stylix.i3.bar.fonts.names ++ [ "FontAwesome6Free" ];
+          };
+        })
       ];
       keybindings = mkDefault {
         "${cfg.modifier}+Return" = "exec ${cfg.terminal}";
@@ -48,6 +53,9 @@ let
         "XF86AudioRaiseVolume" = "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ --limit 1.0";
         "XF86AudioLowerVolume" = "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%- --limit 1.0";
         "XF86AudioMute" = "exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
+        "F3" = "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ --limit 1.0";
+        "F2" = "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%- --limit 1.0";
+        "F4" = "exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
         "${cfg.modifier}+i" = "layout stacking";
         "${cfg.modifier}+o" = "layout tabbed";
         "${cfg.modifier}+p" = "layout toggle split";
