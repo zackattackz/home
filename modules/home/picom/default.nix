@@ -11,6 +11,7 @@ in
     services.picom = {
       enable = true;
       fade = true;
+      backend = "glx";
       fadeDelta = 6;
       fadeSteps = [ 3.0e-2 1.0 ];
       fadeExclude = [
@@ -28,7 +29,7 @@ in
         #"100:class_g = 'Alacritty'"
         "100:class_g = 'steam'"
       ];
-      vSync = false;
+      vSync = true;
       wintypes = {
         tooltip = {
           fade = true;
