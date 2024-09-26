@@ -81,6 +81,7 @@
       };
       overlay = final: prev: {
         # atlasvpn = import ./pkgs/applications/networking/atlasvpn { inherit maintainers; } pkgs;
+        rotification = import ./pkgs/rotification (pkgs // {zackattackz = maintainers.zackattackz;});
       };
       supportedSystems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
       forEachSupportedSystem = f: nixpkgs.lib.genAttrs supportedSystems (system: f {
