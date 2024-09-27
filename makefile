@@ -15,6 +15,7 @@ news:
 
 gen:
 	nix-env --list-generations
+	sudo nix-env --profile /nix/var/nix/profiles/system  --list-generations
 
 gen-home:
 	home-manager generations
@@ -22,6 +23,14 @@ gen-home:
 rollback-home:
 	bash $(home-manager generations | fzf | awk -F '-> ' '{print $2 "/activate"}')
 
-# home-manager remove-generations $(seq n m)
-# sudo nix-env --delete-generations old
-# --profile /nix/var/nix/profiles/system
+expire-home:
+	home-manager generations | cut -d' ' -f 5 | sed 1d | xargs -I _ home-manager remove-generations _
+
+expire-system:
+	nix-env --delete-generations old
+	sudo nix-env --profile /nix/var/nix/profiles/system --delete-generations old
+
+garbage:
+	sudo nix-collect-garbage
+	sudo nix-store --optimise
+	sudo nix-collect-garbage
