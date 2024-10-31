@@ -61,9 +61,6 @@ in
           settings.auto_start = true;
           settings.keymap.recommended = true;
         };
-        copilot-lua = {
-          enable = true;
-        };
       };
       opts = {
         autoindent = true;
