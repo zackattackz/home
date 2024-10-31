@@ -42,6 +42,9 @@ in
       siji
       noto-fonts-cjk
       font-awesome
+corefonts
+      vistafonts
+      source-han-sans
     ];
   };
 }
