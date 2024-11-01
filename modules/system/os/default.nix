@@ -39,7 +39,8 @@ in
 
     security.pam.loginLimits = [
       {
-        domain = "zaha";
+        # TODO for each user in users.users
+        domain = "z";
         item = "nofile";
         value = "524288";
       }

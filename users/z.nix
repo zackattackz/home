@@ -49,8 +49,7 @@ with lib;
     shell.enable = true;
 
     ssh.enable = true;
-    ssh.zaha.enable = true;
-    ssh.zaha-odoo.enable = true;
+    ssh.z.enable = true;
 
     virt.enable = true;
     
@@ -59,14 +58,5 @@ with lib;
     wine.enable = true;
 
     xmonad.enable = false;
-
-    #oe-config = {
-      #enable = true;
-      #settings = {
-        #user = "zaha@odoo.com";
-        #src = "${config.home.homeDirectory}/src/odoo/versions";
-        #internal = "${config.home.homeDirectory}/src/odoo/internal";
-      #};
-    #};
   };
 }

@@ -10,6 +10,6 @@ in
   config = mkIf cfg.enable {
     virtualisation.libvirtd.enable = true;
     programs.virt-manager.enable = true;
-    users.users.zaha.extraGroups = [ "libvirtd" ];
+    users.users.z.extraGroups = [ "libvirtd" ];
   };
 }

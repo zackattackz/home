@@ -19,18 +19,13 @@ in
       '';
       ensureUsers = [
         {
-          name = "zaha";
+          name = "z";
           ensureDBOwnership = true;
-          #ensurePermissions = {
-            #"ALL TABLES IN SCHEMA public" = "ALL PRIVILEGES";
-            #"SCHEMA public" = "USAGE";
-            #"FUNCTION pg_stat_file(text)" = "EXECUTE";
-          #};
           ensureClauses.createdb = true;
         }
       ];
       ensureDatabases = [
-        "zaha"
+        "z"
       ];
     };
   };

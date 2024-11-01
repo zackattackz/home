@@ -9,7 +9,7 @@ with lib;
   ];
 
   config = {
-    accounts.zaha.enable = true;
+    accounts.z.enable = true;
 
     avahi.enable = true;
 

@@ -9,10 +9,10 @@ in
 
 {
   options.accounts = {
-    zaha.enable = mkEnableOption "Enable user zaha";
+    z.enable = mkEnableOption "Enable user z";
   };
   config = {
-    users.users.zaha = mkIf cfg.zaha.enable {
+    users.users.z = mkIf cfg.z.enable {
       isNormalUser = true;
       description = "Zachary Hanham";
       extraGroups = [ "networkmanager" "wheel" "realtime" ];
