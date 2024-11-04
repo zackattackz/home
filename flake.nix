@@ -13,9 +13,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     stylix.url = "github:danth/stylix";
+    impermanence.url = "github:nix-community/impermanence";
   };
 
-  outputs = { nixpkgs, home-manager, nixvim, stylix, ... }:
+  outputs = { nixpkgs, home-manager, nixvim, stylix, impermanence, ... }:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
@@ -25,15 +26,15 @@
         # overlays = [ overlay xmonad.overlay xmonad-contrib.overlay ];
       };
       stylix-config = {
-        image = ./files/wallpaper.jpg;
+        image = ./files/wallpaper;
         base16Scheme = import ./files/scheme.nix;
         enable = true;
         polarity = "dark";
         opacity.terminal = 0.83;
         cursor = {
-          package = pkgs.bibata-cursors;
-          name = "Bibata-Original-Amber";
-          size = 24;
+          package = pkgs.catppuccin-cursors.mochaRosewater;
+          name = "catppuccin-mocha-rosewater-cursors";
+          size = 32;
         };
         fonts = {
           serif = {
@@ -65,10 +66,14 @@
         inherit stylix-config;
         homeFilesPath = ./files/home;
         homeModulesPath = ./modules/home;
+        username = "z";
       };
       systemArgs = {
-        inherit stylix-config;
+        inherit overlay stylix-config homeArgs;
+        home-modules = import ./users/z.nix;
         systemModulesPath = ./modules/system;
+        nixvimModule = nixvim.homeManagerModules.nixvim;
+        impermanenceModule = impermanence.homeManagerModules.impermanence;
       };
       maintainers.zackattackz = {
         email = "z@zmhanham.com";
@@ -76,9 +81,8 @@
         githubId = 39349995;
         name = "Zachary Hanham";
       };
-      # overlay = final: prev: {
-      #  rotification = import ./pkgs/rotification (pkgs // {zackattackz = maintainers.zackattackz;});
-      # };
+      overlay = final: prev: {
+      };
       supportedSystems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
       forEachSupportedSystem = f: nixpkgs.lib.genAttrs supportedSystems (system: f {
         pkgs = import nixpkgs { inherit system; };
@@ -105,7 +109,7 @@
       };
       nixosConfigurations."nyx" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        modules = [ ./systems/nyx.nix stylix.nixosModules.stylix ];
+        modules = [ ./systems/nyx.nix stylix.nixosModules.stylix home-manager.nixosModules.home-manager impermanence.nixosModules.impermanence ];
         specialArgs = systemArgs;
       };
       nixosConfigurations."hermes" = nixpkgs.lib.nixosSystem {

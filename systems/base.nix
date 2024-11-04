@@ -1,5 +1,5 @@
 
-{config, lib, pkgs, systemModulesPath, overlay, stylix-config, ...}:
+{config, lib, pkgs, systemModulesPath, overlay, homeArgs, home-modules, impermanenceModule, nixvimModule, stylix-config, ...}:
 
 {
   imports = [
@@ -13,6 +13,7 @@
     (systemModulesPath + /gamemode)
     (systemModulesPath + /geoclue2)
     (systemModulesPath + /i3-sway)
+    (systemModulesPath + /impermanence)
     (systemModulesPath + /locale)
     (systemModulesPath + /meta)
     (systemModulesPath + /network)
@@ -33,4 +34,9 @@
   ];
   nixpkgs.overlays = [ overlay ];
   stylix = stylix-config;
+  home-manager = {
+    users.z = home-modules;
+    sharedModules = [ nixvimModule impermanenceModule ];
+    extraSpecialArgs = homeArgs;
+  };
 }

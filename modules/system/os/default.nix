@@ -61,5 +61,7 @@ in
     services.udev.extraRules = ''
       KERNEL=="uinput", SUBSYSTEM=="misc", OPTIONS+="static_node=uinput", TAG+="uaccess"
     '';
+
+    security.sudo.extraConfig = "Defaults lecture=\"never\"";
   };
 }

@@ -29,7 +29,7 @@ with lib;
     geoclue2.enable = true;
 
     i3-sway.enable = true;
-    
+    impermanence.enable = true;   
     locale.enable = true;
 
     meta.enable = true;
@@ -47,7 +47,7 @@ with lib;
 
     podman.enable = true;
 
-    postgres.enable = true;
+    postgres.enable = false;
 
     steam.enable = true;
 
@@ -55,7 +55,7 @@ with lib;
     
     vpn.enable = true;
 
-    waydroid.enable = true;
+    waydroid.enable = false;
 
     # wayland.enable = true;
 

@@ -18,6 +18,7 @@ in
       enable = true;
       profiles.personal = {
         id = 0;
+        isDefault = true;
         settings = commonSettings;
       };
       profiles.work = {

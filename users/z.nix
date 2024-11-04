@@ -53,7 +53,7 @@ with lib;
 
     virt.enable = true;
     
-    vscode.enable = true;
+    vscode.enable = false;
 
     wine.enable = true;
 

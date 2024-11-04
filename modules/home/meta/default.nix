@@ -8,7 +8,7 @@ in
 {
   options.meta.enable = mkEnableOption "Module concerning all features related to direct operation of nix/home-manager.";
   config = mkIf cfg.enable {
-    nix.package = pkgs.nix;
+    #nix.package = pkgs.nix;
 
     nix.settings = {
       extra-experimental-features = ["flakes" "nix-command"];

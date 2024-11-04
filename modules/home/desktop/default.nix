@@ -45,6 +45,10 @@ in
       enable = true;
       # settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
     };
+    gtk.iconTheme = {
+      name = "candy-icons";
+      package = pkgs.candy-icons;
+    };
     fonts.fontconfig.enable = true;
     services.blueman-applet.enable = true;
     services.network-manager-applet.enable = true;

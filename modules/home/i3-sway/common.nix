@@ -4,6 +4,7 @@ with lib;
 
 let
   cfg = config.i3-sway;
+  bg-max-color = config.stylix.base16Scheme.bg-fill;
   i3status-rust-cfg-file = "${config.xdg.configHome}/i3status-rust/config-default.toml";
   wm-config = {
     config = {
@@ -49,7 +50,7 @@ let
         "${cfg.modifier}+v" = "split v";
         "${cfg.modifier}+y" = "fullscreen toggle";
         "${cfg.modifier}+F6" = "exec bash -c '[[ $(systemctl --user is-active picom) == \"active\" ]] && systemctl --user stop picom || systemctl --user start picom'";
-        "${cfg.modifier}+F5" = "exec \"bash -c 'autorandr --cycle; ${pkgs.feh}/bin/feh --bg-center ${../../../files/wallpaper.jpg}'\"";
+        "${cfg.modifier}+F5" = "exec \"bash -c 'autorandr --cycle; ${pkgs.feh}/bin/feh --bg-max ${../../../files/wallpaper} --image-bg \\#${bg-max-color}'\"";
         "XF86AudioRaiseVolume" = "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ --limit 1.0";
         "XF86AudioLowerVolume" = "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%- --limit 1.0";
         "XF86AudioMute" = "exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
