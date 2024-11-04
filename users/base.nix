@@ -18,7 +18,6 @@ with lib;
     (homeModulesPath + /mpd)
     (homeModulesPath + /neovim)
     (homeModulesPath + /nixvim)
-    (homeModulesPath + /odoo)
     (homeModulesPath + /picom)
     (homeModulesPath + /polybar)
     (homeModulesPath + /redshift)
