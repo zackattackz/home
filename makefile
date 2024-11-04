@@ -7,6 +7,9 @@ all: os home
 os:
 	sudo nixos-rebuild boot --flake "$(ROOT_DIR)"
 
+oss:
+	sudo nixos-rebuild switch --flake "$(ROOT_DIR)"
+
 home:
 	home-manager switch --flake "$(ROOT_DIR)"
 
