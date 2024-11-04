@@ -22,9 +22,6 @@ in
             bashls = {
               enable = true;
             };
-            hls = {
-              enable = true;
-            };
           };
         };
         telescope = {
@@ -46,7 +43,9 @@ in
         };
         treesitter = {
           enable = true;
-          indent = true;
+          settings = {
+            indent.enable = true;
+          };
         };
         fugitive.enable = true;
         dashboard = {
@@ -60,6 +59,9 @@ in
           enable = true;
           settings.auto_start = true;
           settings.keymap.recommended = true;
+        };
+        web-devicons = {
+          enable = true;
         };
       };
       opts = {

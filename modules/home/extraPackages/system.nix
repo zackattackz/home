@@ -17,11 +17,11 @@ in
       caffeine-ng
       vesktop
       element-desktop
-      gnome.seahorse
-      gnome.gnome-disk-utility
-      gnome.file-roller
+      seahorse
+      gnome-disk-utility
+      file-roller
       gnumake
-      transmission-gtk
+      transmission_3-gtk
       mpv
       feh
       ffmpeg-full
