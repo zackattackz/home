@@ -24,12 +24,8 @@ in
       config = {
         # menu = "${pkgs.rofi}/bin/rofi -show drun";
         # modifier = "Mod4";
-        
-
         startup = [
-          { command = "autorandr --cycle"; notification = false; }
-          { command = "alttab -d 2 -sc 1"; notification = false; }
-          { command = "dbus-update-activation-environment --all"; notification = false; }
+          { command = "xsetroot -cursor_name left_ptr"; notification = false; }
         ];
       };
     };
