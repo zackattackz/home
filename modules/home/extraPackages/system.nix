@@ -40,7 +40,7 @@ in
       ripgrep
       # fonts
       siji
-      noto-fonts-cjk
+      noto-fonts-cjk-sans
       font-awesome
       corefonts
       vistafonts
