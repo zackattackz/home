@@ -63,5 +63,9 @@ in
     '';
 
     security.sudo.extraConfig = "Defaults lecture=\"never\"";
+
+    # workaround for https://github.com/nix-community/impermanence/issues/229
+    boot.initrd.systemd.suppressedUnits = [ "systemd-machine-id-commit.service" ];
+    systemd.suppressedSystemUnits = [ "systemd-machine-id-commit.service" ];
   };
 }
