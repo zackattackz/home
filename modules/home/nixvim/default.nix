@@ -10,12 +10,22 @@ in
   config = mkIf cfg.enable {
     programs.nixvim = {
       enable = true;
-      # colorschemes.${colorscheme}.enable = true;
+      colorschemes.catppuccin = {
+        enable = true;
+        settings = {
+          flavour = "mocha";
+        };
+      };
       viAlias = true;
       vimAlias = true;
+      clipboard.providers.xclip.enable = true;
       plugins = {
         direnv.enable = true;
-        lightline.enable = true;
+        lazygit.enable = true;
+        lualine = {
+          enable = true;
+          settings.colorscheme = "base16";
+        };
         lsp = {
           enable = true;
           servers = {
@@ -28,7 +38,7 @@ in
           enable = true;
           # highlightTheme = colorscheme;
           keymaps = {
-            "<leader>fb" = "buffers";
+            "<leader>bb" = "buffers";
             "<leader>fg" = "live_grep";
             "<leader>ff" = "find_files";
             "<leader>fj" = "jumplist";
@@ -47,7 +57,6 @@ in
             indent.enable = true;
           };
         };
-        fugitive.enable = true;
         dashboard = {
           enable = true;
         };
