@@ -68,7 +68,9 @@ in
     programs.bash = {
       enable = true;
       shellAliases = {
-          xclip = "xclip -sel clip";
+        xclip = "xclip -sel clip";
+        lg = "lazygit";
+        ll = "ls -lah";
       };
       enableCompletion = true;
       historyControl = [ "ignoredups" ];

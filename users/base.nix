@@ -14,6 +14,7 @@ with lib;
     (homeModulesPath + /gpg)
     (homeModulesPath + /i3status-rust)
     (homeModulesPath + /i3-sway)
+    (homeModulesPath + /lazygit)
     (homeModulesPath + /meta)
     (homeModulesPath + /mpd)
     (homeModulesPath + /neovim)

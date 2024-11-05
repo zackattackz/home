@@ -30,6 +30,7 @@ with lib;
     
     i3.enable = true;
     #sway.enable = true;
+    lazygit.enable = true;
     meta.enable = true;
 
     mpd.enable = true;
