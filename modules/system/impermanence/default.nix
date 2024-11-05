@@ -36,6 +36,7 @@ in
           ".local/share/Steam"
           ".local/share/direnv"
           ".local/share/lutris"
+          ".local/share/nvim"
           ".config/vesktop"
           { directory = ".gnupg"; mode = "0700"; }
           { directory = ".ssh"; mode = "0700"; }
