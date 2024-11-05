@@ -10,13 +10,7 @@ in
   config = mkIf cfg.enable {
     services.picom = {
       enable = true;
-      fade = true;
       backend = "glx";
-      fadeDelta = 6;
-      fadeSteps = [ 3.0e-2 1.0 ];
-      fadeExclude = [
-        "window_type *= 'menu'"
-      ];
       shadow = true;
       shadowOffsets = [ (-7) (-7) ];
       shadowOpacity = 0.75;
@@ -32,7 +26,6 @@ in
       vSync = true;
       wintypes = {
         tooltip = {
-          fade = true;
           shadow = true;
           opacity = 1;
           focus = true;
@@ -67,6 +60,13 @@ in
           "window_type = 'desktop'"
           "_GTK_FRAME_EXTENTS@:c"
         ];
+        blur = {
+          method = "dual_kawase";
+          strength = 6;
+          background = false;
+          background-frame = false;
+          background-fixed = false;
+        };
         mark-wmwin-focused = true;
         mark-ovredir-focused = true;
         detect-rounded-corners = true;

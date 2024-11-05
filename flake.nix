@@ -30,7 +30,7 @@
         base16Scheme = import ./files/scheme.nix;
         enable = true;
         polarity = "dark";
-        opacity.terminal = 0.83;
+        opacity.terminal = 0.4;
         cursor = {
           package = pkgs.catppuccin-cursors.mochaRosewater;
           name = "catppuccin-mocha-rosewater-cursors";
