@@ -31,4 +31,9 @@ with lib;
     (homeModulesPath + /xmonad)
   ];
   stylix = stylix-config;
+  home.stateVersion = "23.05";
+  nix.settings = {
+    extra-experimental-features = ["flakes" "nix-command"];
+  };
+  nixpkgs.config.allowUnfreePredicate = (pkg: true);
 }

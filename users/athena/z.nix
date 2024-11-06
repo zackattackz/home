@@ -5,22 +5,22 @@ with lib;
 
 {
   
-  imports = [ ./base.nix ];
+  imports = [ ../base.nix ];
   
   config = {
     
     alacritty.enable = true;
 
     autorandr = {
-      enable = true;
-      machine = "nyx";
+      enable = false;
+      machine = "athena";
     };
 
     desktop.enable = true;
     # desktop.fontFamily = "Iosevka NFM";
 
     extraPackages.system.enable = true;
-    extraPackages.games.enable = true;
+    extraPackages.games.enable = false;
 
     firefox.enable = true;
 
@@ -31,7 +31,7 @@ with lib;
     i3.enable = true;
     #sway.enable = true;
     lazygit.enable = true;
-    meta.enable = true;
+    meta.enable = false;
 
     mpd.enable = true;
 
@@ -56,7 +56,7 @@ with lib;
     
     vscode.enable = false;
 
-    wine.enable = true;
+    wine.enable = false;
 
     xmonad.enable = false;
   };

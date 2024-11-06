@@ -1,5 +1,5 @@
 
-{config, lib, pkgs, systemModulesPath, overlay, homeArgs, home-modules, impermanenceModule, nixvimModule, stylix-config, ...}:
+{config, lib, pkgs, systemModulesPath, overlay, homeArgs, home-modules, impermanenceModule, nixvimModule, stylix-config, system, ...}:
 
 {
   imports = [
@@ -37,6 +37,6 @@
   home-manager = {
     users.z = home-modules;
     sharedModules = [ nixvimModule impermanenceModule ];
-    extraSpecialArgs = homeArgs;
+    extraSpecialArgs = homeArgs // { inherit system; };
   };
 }

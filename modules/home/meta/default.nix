@@ -17,11 +17,11 @@ in
     nixpkgs.config.allowUnfreePredicate = (pkg: true);
 
     home = {
-      inherit username;
-      homeDirectory = "/home/${username}";
+      #inherit username;
+      #homeDirectory = "/home/${username}";
       stateVersion = "23.05";
     };
 
-    programs.home-manager.enable = true;
+    #programs.home-manager.enable = true;
   };
 }

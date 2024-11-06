@@ -66,11 +66,9 @@
         inherit stylix-config;
         homeFilesPath = ./files/home;
         homeModulesPath = ./modules/home;
-        username = "z";
       };
       systemArgs = {
         inherit overlay stylix-config homeArgs;
-        home-modules = import ./users/z.nix;
         systemModulesPath = ./modules/system;
         nixvimModule = nixvim.homeManagerModules.nixvim;
         impermanenceModule = impermanence.homeManagerModules.impermanence;
@@ -99,23 +97,15 @@
           username = "z";
         };
       };
-      homeConfigurations."z@hermes" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [ ./users/z.nix nixvim.homeManagerModules.nixvim ];
-        extraSpecialArgs = homeArgs // {
-          username = "z";
-          system = "hermes";
-        };
-      };
       nixosConfigurations."nyx" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [ ./systems/nyx.nix stylix.nixosModules.stylix home-manager.nixosModules.home-manager impermanence.nixosModules.impermanence ];
-        specialArgs = systemArgs;
+        specialArgs = systemArgs // { system = "nyx"; home-modules = import ./users/nyx/z.nix; };
       };
-      nixosConfigurations."hermes" = nixpkgs.lib.nixosSystem {
+      nixosConfigurations."athena" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        modules = [ ./systems/hermes.nix ];
-        specialArgs = systemArgs;
+        modules = [ ./systems/athena.nix stylix.nixosModules.stylix home-manager.nixosModules.home-manager impermanence.nixosModules.impermanence ];
+        specialArgs = systemArgs // { system = "athena"; home-modules = import ./users/athena/z.nix; };
       };
       devShells = forEachSupportedSystem ({ pkgs }: {
         default = pkgs.mkShell {
