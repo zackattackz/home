@@ -15,25 +15,16 @@ with lib;
     (homeModulesPath + /i3status-rust)
     (homeModulesPath + /i3-sway)
     (homeModulesPath + /lazygit)
-    (homeModulesPath + /meta)
     (homeModulesPath + /mpd)
-    (homeModulesPath + /neovim)
     (homeModulesPath + /nixvim)
     (homeModulesPath + /picom)
     (homeModulesPath + /polybar)
-    (homeModulesPath + /redshift)
     (homeModulesPath + /rofi)
     (homeModulesPath + /shell)
     (homeModulesPath + /ssh)
     (homeModulesPath + /virt)
-    (homeModulesPath + /vscode)
     (homeModulesPath + /wine)
-    (homeModulesPath + /xmonad)
   ];
   stylix = stylix-config;
   home.stateVersion = "23.05";
-  nix.settings = {
-    extra-experimental-features = ["flakes" "nix-command"];
-  };
-  nixpkgs.config.allowUnfreePredicate = (pkg: true);
 }

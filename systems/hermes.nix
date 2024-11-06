@@ -23,8 +23,6 @@ with lib;
     
     locale.enable = true;
 
-    meta.enable = true;
-    
     network.enable = true;
     network.hostName = "hermes";
 

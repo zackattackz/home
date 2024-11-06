@@ -22,8 +22,6 @@ in
     xsession.windowManager.i3 = {
       enable = true;
       config = {
-        # menu = "${pkgs.rofi}/bin/rofi -show drun";
-        # modifier = "Mod4";
         startup = [
           { command = "xsetroot -cursor_name left_ptr"; notification = false; }
         ];

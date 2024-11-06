@@ -31,19 +31,14 @@ with lib;
     i3.enable = true;
     #sway.enable = true;
     lazygit.enable = true;
-    meta.enable = false;
 
     mpd.enable = true;
-
-    neovim.enable = false;
 
     nixvim.enable = true;
 
     picom.enable = true;
 
     polybar.enable = false;
-
-    redshift.enable = false;
 
     rofi.enable = true;
 
@@ -54,10 +49,6 @@ with lib;
 
     virt.enable = true;
     
-    vscode.enable = false;
-
     wine.enable = false;
-
-    xmonad.enable = false;
   };
 }

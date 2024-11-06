@@ -19,11 +19,13 @@
   outputs = { nixpkgs, home-manager, nixvim, stylix, impermanence, ... }:
     let
       system = "x86_64-linux";
+      # overlay = final: prev: {
+      # };
       pkgs = import nixpkgs {
         inherit system;
         config.allowUnfree = true;
-        config.allowUnfreePredicate = pkg: true;
-        # overlays = [ overlay xmonad.overlay xmonad-contrib.overlay ];
+        config.allowUnfreePredicate = _: true;
+        # overlays = [ some-overlays-here ];
       };
       stylix-config = {
         image = ./files/wallpaper;
@@ -68,7 +70,8 @@
         homeModulesPath = ./modules/home;
       };
       systemArgs = {
-        inherit overlay stylix-config homeArgs;
+        # inherit overlay
+        inherit stylix-config homeArgs;
         systemModulesPath = ./modules/system;
         nixvimModule = nixvim.homeManagerModules.nixvim;
         impermanenceModule = impermanence.homeManagerModules.impermanence;
@@ -79,38 +82,26 @@
         githubId = 39349995;
         name = "Zachary Hanham";
       };
-      overlay = final: prev: {
-      };
-      supportedSystems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
-      forEachSupportedSystem = f: nixpkgs.lib.genAttrs supportedSystems (system: f {
-        pkgs = import nixpkgs { inherit system; };
-      });
     in {
-      homeConfigurations."z@nyx" = home-manager.lib.homeManagerConfiguration {
+      nixosConfigurations."nyx" = nixpkgs.lib.nixosSystem {
         inherit pkgs;
         modules = [
-          ./users/z.nix
-          nixvim.homeManagerModules.nixvim
-          stylix.homeManagerModules.stylix
+          ./systems/nyx.nix
+          home-manager.nixosModules.home-manager
+          stylix.nixosModules.stylix
+          impermanence.nixosModules.impermanence
         ];
-        extraSpecialArgs = homeArgs // {
-          username = "z";
-        };
-      };
-      nixosConfigurations."nyx" = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [ ./systems/nyx.nix stylix.nixosModules.stylix home-manager.nixosModules.home-manager impermanence.nixosModules.impermanence ];
         specialArgs = systemArgs // { system = "nyx"; home-modules = import ./users/nyx/z.nix; };
       };
       nixosConfigurations."athena" = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
+        inherit pkgs;
         modules = [ ./systems/athena.nix stylix.nixosModules.stylix home-manager.nixosModules.home-manager impermanence.nixosModules.impermanence ];
         specialArgs = systemArgs // { system = "athena"; home-modules = import ./users/athena/z.nix; };
       };
-      devShells = forEachSupportedSystem ({ pkgs }: {
+      devShells = {
         default = pkgs.mkShell {
-          packages = with pkgs; [ ghc ];
+          packages = with pkgs; [ nixfmt-rfc-style ];
         };
-      });
+      };
     };
 }

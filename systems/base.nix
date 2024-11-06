@@ -1,5 +1,5 @@
 
-{config, lib, pkgs, systemModulesPath, overlay, homeArgs, home-modules, impermanenceModule, nixvimModule, stylix-config, system, ...}:
+{config, lib, pkgs, systemModulesPath, homeArgs, home-modules, impermanenceModule, nixvimModule, stylix-config, system, ...}:
 
 {
   imports = [
@@ -15,7 +15,6 @@
     (systemModulesPath + /i3-sway)
     (systemModulesPath + /impermanence)
     (systemModulesPath + /locale)
-    (systemModulesPath + /meta)
     (systemModulesPath + /network)
     (systemModulesPath + /nix-ld)
     (systemModulesPath + /nvidia)
@@ -29,14 +28,16 @@
     (systemModulesPath + /waydroid)
     (systemModulesPath + /wayland)
     (systemModulesPath + /xserver)
-    (systemModulesPath + /xfce)
-    (systemModulesPath + /xmonad)
   ];
-  nixpkgs.overlays = [ overlay ];
+  # nixpkgs.overlays = [ overlay ];
+  system.stateVersion = "23.05";
   stylix = stylix-config;
+  nix.settings.experimental-features = ["flakes" "nix-command"];
   home-manager = {
     users.z = home-modules;
     sharedModules = [ nixvimModule impermanenceModule ];
     extraSpecialArgs = homeArgs // { inherit system; };
+    useGlobalPkgs = true;
+    useUserPackages = true;
   };
 }

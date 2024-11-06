@@ -17,7 +17,6 @@ with lib;
     };
 
     desktop.enable = true;
-    # desktop.fontFamily = "Iosevka NFM";
 
     extraPackages.system.enable = true;
     extraPackages.games.enable = true;
@@ -31,19 +30,14 @@ with lib;
     i3.enable = true;
     #sway.enable = true;
     lazygit.enable = true;
-    meta.enable = false;
 
     mpd.enable = true;
-
-    neovim.enable = false;
 
     nixvim.enable = true;
 
     picom.enable = true;
 
     polybar.enable = false;
-
-    redshift.enable = false;
 
     rofi.enable = true;
 
@@ -54,10 +48,6 @@ with lib;
 
     virt.enable = true;
     
-    vscode.enable = false;
-
     wine.enable = true;
-
-    xmonad.enable = false;
   };
 }

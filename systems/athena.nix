@@ -32,8 +32,6 @@ with lib;
     impermanence.enable = true;   
     locale.enable = true;
 
-    meta.enable = true;
-    
     network.enable = true;
     network.hostName = "athena";
 
@@ -60,10 +58,5 @@ with lib;
     # wayland.enable = true;
 
     xserver.enable = true;
-
-    xfce.enable = false;
-
-    xmonad.enable = false;
-
   };
 }
