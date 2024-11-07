@@ -21,5 +21,9 @@ in
       capSysNice = true;
     };
     hardware.steam-hardware.enable = true;
+    impermanence.extraUserDirs = [
+      ".steam"
+      ".local/share/Steam"
+    ];
   };
 }

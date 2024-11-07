@@ -83,5 +83,12 @@ in
         bind '"\C-p": "\C-M"'
       '';
     };
+
+    impermanence.extraDirs = [
+      ".local/share/direnv"
+    ];
+    impermanence.extraFiles = [
+      ".bash_history"
+    ];
   };
 }

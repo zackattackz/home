@@ -102,5 +102,9 @@ in
         mapleader = " ";
       };
     };
+    impermanence.extraDirs = [
+      ".local/share/nvim"
+      ".local/state/nvim"
+    ];
   };
 }

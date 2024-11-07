@@ -18,5 +18,6 @@ in
     security.pam.services.gdm.enableGnomeKeyring = true;
     services.blueman.enable = true;
     services.gnome.gnome-keyring.enable = true;
+    impermanence.extraUserDirs = [ ".local/share/keyrings" ];
   };
 }

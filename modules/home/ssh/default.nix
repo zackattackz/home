@@ -23,5 +23,6 @@ in
         };
       };
     };
+    impermanence.extraDirs = [ ".ssh" ];
   };
 }

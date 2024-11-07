@@ -26,5 +26,6 @@ in
         settings = commonSettings;
       };
     };
+    impermanence.extraDirs = [ ".mozilla" ];
   };
 }

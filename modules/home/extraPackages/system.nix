@@ -15,9 +15,7 @@ in
       arandr
       alttab
       caffeine-ng
-      vesktop
       element-desktop
-      seahorse
       gnome-disk-utility
       file-roller
       gnumake

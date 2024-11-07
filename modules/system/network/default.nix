@@ -23,5 +23,6 @@ in
     networking.firewall.enable = false;
     networking.enableIPv6 = false;
     boot.kernel.sysctl."net.ipv6.conf.enp3s0.disable_ipv6" = 1;
+    impermanence.extraDirs = [ "/etc/NetworkManager/system-connections" ];
   };
 }

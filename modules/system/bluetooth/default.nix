@@ -15,5 +15,6 @@ in
     hardware.bluetooth.enable = true;
     hardware.bluetooth.powerOnBoot = true;
     services.pipewire.wireplumber.configPackages = [ bluez-wireplumber-conf ];
+    impermanence.extraDirs = [ "/var/lib/bluetooth" ];
   };
 }

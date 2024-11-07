@@ -10,5 +10,6 @@ in
   config = mkIf cfg.enable {
     programs.gpg.enable = true;
     services.gpg-agent.enable = true;
+    impermanence.extraDirs = [ ".gnupg" ];
   };
 }
