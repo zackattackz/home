@@ -25,6 +25,8 @@ in
         startup = [
           { command = "xsetroot -cursor_name left_ptr"; notification = false; }
         ];
+        # Force indicator color to be same as border color
+        colors.focused.indicator = mkForce base-cfg.config.colors.focused.border;
       };
     };
   };
