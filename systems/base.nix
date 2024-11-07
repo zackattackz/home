@@ -1,5 +1,5 @@
 
-{config, lib, pkgs, systemModulesPath, homeArgs, home-modules, impermanenceModule, nixvimModule, stylix-config, system, ...}:
+{config, lib, pkgs, systemModulesPath, homeArgs, home-modules, impermanenceModule, nixvimModule, system, ...}:
 
 {
   imports = [
@@ -23,6 +23,7 @@
     (systemModulesPath + /podman)
     (systemModulesPath + /postgres)
     (systemModulesPath + /steam)
+    (systemModulesPath + /stylix)
     (systemModulesPath + /virt)
     (systemModulesPath + /vpn)
     (systemModulesPath + /waydroid)
@@ -31,7 +32,6 @@
   ];
   # nixpkgs.overlays = [ overlay ];
   system.stateVersion = "23.05";
-  stylix = stylix-config;
   nix.settings.experimental-features = ["flakes" "nix-command"];
   home-manager = {
     users.z = home-modules;

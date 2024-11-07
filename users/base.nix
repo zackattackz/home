@@ -1,5 +1,5 @@
 
-{config, lib, pkgs, homeModulesPath, system, stylix-config, ...}:
+{config, lib, pkgs, homeModulesPath, system, ...}:
 
 with lib;
 
@@ -29,6 +29,5 @@ with lib;
     (homeModulesPath + /virt)
     (homeModulesPath + /wine)
   ];
-  stylix = stylix-config;
   home.stateVersion = "23.05";
 }

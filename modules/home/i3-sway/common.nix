@@ -6,7 +6,7 @@ let
   cfg = config.i3-sway;
   bg-max-color = config.stylix.base16Scheme.bg-fill;
   i3status-rust-cfg-file = "${config.xdg.configHome}/i3status-rust/config-default.toml";
-  autorandr-cycle-cmd = "autorandr --cycle; ${pkgs.feh}/bin/feh --bg-max ${../../../files/wallpaper} --image-bg \\#${bg-max-color}";
+  autorandr-cycle-cmd = "autorandr --cycle; ${pkgs.feh}/bin/feh --bg-max ${config.stylix.image} --image-bg \\#${bg-max-color}";
   wm-config = {
     config = {
       focus.followMouse = false;
