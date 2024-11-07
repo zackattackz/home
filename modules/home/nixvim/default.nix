@@ -109,6 +109,12 @@ in
           key = "<leader>fp";
           action = ":Telescope projects<CR>";
         }
+        {
+          mode = "n";
+          key = "<C-e>";
+          action = ":lua ToggleChadTree()<CR>";
+          options.remap = true;
+        }
 
         # hop keybinds
         {
@@ -135,6 +141,36 @@ in
       globals = {
         mapleader = " ";
       };
+      extraConfigLuaPre = ''
+        function IsChadTreeOpen()
+          for _, win in ipairs(vim.api.nvim_list_wins()) do
+            local buf = vim.api.nvim_win_get_buf(win)
+            if vim.api.nvim_buf_get_option(buf, 'filetype') == 'CHADTree' then
+              return true
+            end
+          end
+          return false
+        end
+
+        function ToggleChadTree()
+          local current_buf = vim.api.nvim_get_current_buf()
+          if IsChadTreeOpen() then
+            if vim.api.nvim_buf_get_option(current_buf, 'filetype') == 'CHADTree' then
+              vim.cmd('CHADopen')
+            else
+              for _, win in ipairs(vim.api.nvim_list_wins()) do
+                local buf = vim.api.nvim_win_get_buf(win)
+                if vim.api.nvim_buf_get_option(buf, 'filetype') == 'CHADTree' then
+                  vim.api.nvim_set_current_win(win)
+                  return
+                end
+              end
+            end
+          else
+            vim.cmd('CHADopen')
+          end
+        end
+      '';
     };
   };
 }
