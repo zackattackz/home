@@ -12,7 +12,6 @@ with lib;
     cursor = {
       package = pkgs.catppuccin-cursors.mochaRosewater;
       name = "catppuccin-mocha-rosewater-cursors";
-      size = 32;
     };
     fonts = {
       serif = {

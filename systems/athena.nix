@@ -10,5 +10,10 @@ with lib;
 
   config = {
     network.hostName = "athena";
+    stylix.cursor.size = 16;
+    stylix.fonts.sizes = {
+      applications = 11;
+      terminal = 10;
+    };
   };
 }
