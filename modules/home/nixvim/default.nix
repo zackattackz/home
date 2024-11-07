@@ -8,6 +8,10 @@ in
 {
   options.nixvim.enable = mkEnableOption "nixvim options";
   config = mkIf cfg.enable {
+    impermanence.extraDirs = [
+      ".local/share/nvim"
+      ".local/state/nvim"
+    ];
     programs.nixvim = {
       enable = true;
       colorschemes.catppuccin = {
@@ -22,6 +26,8 @@ in
       plugins = {
         direnv.enable = true;
         lazygit.enable = true;
+        chadtree.enable = true;
+        hop.enable = true;
         lualine = {
           enable = true;
           settings.colorscheme = "base16";
@@ -32,13 +38,19 @@ in
             bashls = {
               enable = true;
             };
+            nixd = {
+              enable = true;
+            };
           };
+          postConfig = ''
+            vim.diagnostic.config({signs=false})
+          '';
         };
         telescope = {
           enable = true;
           # highlightTheme = colorscheme;
           keymaps = {
-            "<leader>bb" = "buffers";
+            "<leader> " = "buffers";
             "<leader>fg" = "live_grep";
             "<leader>ff" = "find_files";
             "<leader>fj" = "jumplist";
@@ -97,14 +109,32 @@ in
           key = "<leader>fp";
           action = ":Telescope projects<CR>";
         }
+
+        # hop keybinds
+        {
+          key = "<leader>j";
+          action.__raw = ''
+            function()
+              require'hop'.hint_char2({
+                direction = require'hop.hint'.HintDirection.AFTER_CURSOR,
+              })
+            end
+          '';
+        }
+        {
+          key = "<leader>k";
+          action.__raw = ''
+            function()
+              require'hop'.hint_char2({
+                direction = require'hop.hint'.HintDirection.BEFORE_CURSOR,
+              })
+            end
+          '';
+        }
       ];
       globals = {
         mapleader = " ";
       };
     };
-    impermanence.extraDirs = [
-      ".local/share/nvim"
-      ".local/state/nvim"
-    ];
   };
 }
