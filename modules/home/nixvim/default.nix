@@ -46,15 +46,21 @@ in
             vim.diagnostic.config({signs=false})
           '';
         };
+        lsp-format = {
+          enable = true;
+        };
+        lsp-lines = {
+          enable = true;
+        };
         telescope = {
           enable = true;
           # highlightTheme = colorscheme;
           keymaps = {
-            "<leader> " = "buffers";
-            "<leader>fg" = "live_grep";
-            "<leader>ff" = "find_files";
-            "<leader>fj" = "jumplist";
-            "<c-p>" = "oldfiles";
+            "<leader> " = "find_files";
+            "<leader>g" = "live_grep";
+            "<leader>b" = "buffers";
+            "<leader>o" = "jumplist";
+            "<leader>p" = "oldfiles";
           };
           extensions = {
             file-browser = {
