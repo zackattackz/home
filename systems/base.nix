@@ -14,6 +14,7 @@
     (systemModulesPath + /geoclue2)
     (systemModulesPath + /i3-sway)
     (systemModulesPath + /impermanence)
+    (systemModulesPath + /libinput)
     (systemModulesPath + /locale)
     (systemModulesPath + /network)
     (systemModulesPath + /nix-ld)

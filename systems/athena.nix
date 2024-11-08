@@ -15,5 +15,7 @@ with lib;
       applications = 11;
       terminal = 10;
     };
+    libinput.enable = true;
+    libinput.dev = "/dev/input/event7";
   };
 }
