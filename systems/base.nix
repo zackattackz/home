@@ -43,13 +43,11 @@
   };
 
   accounts.z.enable = true;
-  avahi.enable = true;
   bluetooth.enable = true;
   bootloader.enable = true;
   bootloader.enableCryptoKeyfile = true;
   desktop.enable = true;
   displaymanager.enable = true;
-  docker.enable = true;
   geoclue2.enable = true;
   i3-sway.enable = true;
   impermanence.enable = true;
