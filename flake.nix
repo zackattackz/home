@@ -59,7 +59,7 @@
         modules = [ ./systems/athena.nix stylix.nixosModules.stylix home-manager.nixosModules.home-manager impermanence.nixosModules.impermanence ];
         specialArgs = systemArgs // { system = "athena"; home-modules = import ./users/athena/z.nix; };
       };
-      devShells = {
+      devShells.${system} = {
         default = pkgs.mkShell {
           packages = with pkgs; [ nixfmt-rfc-style ];
         };
