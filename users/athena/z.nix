@@ -8,5 +8,6 @@ with lib;
   config = {
     autorandr.machine = "athena";
     i3.enableBacklight = true;
+    i3status-rust.enableBattery = true;
   };
 }

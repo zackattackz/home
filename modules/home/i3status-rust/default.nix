@@ -6,10 +6,12 @@ let
   cfg = config.i3status-rust;
   colors = config.stylix.base16Scheme;
   stylixTheme = config.lib.stylix.i3status-rust.bar // { separator = ""; };
+  battery-format = " $icon $percentage.eng(w:4) ";
 in
 {
   options.i3status-rust = {
     enable = mkEnableOption "i3status-rust";
+    enableBattery = mkEnableOption "battery block";
   };
   config = mkIf cfg.enable {
     programs.i3status-rust = {
@@ -40,6 +42,13 @@ in
           show_volume_when_muted = true;
           headphones_indicator = true;
         }
+        (mkIf cfg.enableBattery {
+          block = "battery";
+          format = battery-format;
+          full_format = battery-format;
+          empty_format = battery-format;
+          not_charging_format = battery-format;
+        })
         {
           block = "time";
           interval = 60;
