@@ -13,6 +13,7 @@ in
   ];
   options.i3 = {
     enable = mkEnableOption "i3";
+    enableBacklight = mkEnableOption "backlight control";
   };
   config = mkIf cfg.enable {
     xsession.enable = true;
@@ -25,6 +26,10 @@ in
         startup = [
           { command = "xsetroot -cursor_name left_ptr"; notification = false; }
         ];
+        keybindings = mkIf cfg.enableBacklight {
+          "XF86MonBrightnessUp" = "exec light -A 5";
+          "XF86MonBrightnessDown" = "exec light -U 5";
+        };
         # Force indicator color to be same as border color
         colors.focused.indicator = mkForce base-cfg.config.colors.focused.border;
       };

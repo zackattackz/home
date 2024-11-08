@@ -36,7 +36,7 @@ let
         { command = "alttab -d 2 -sc 1"; notification = false; }
         { command = "dbus-update-activation-environment --all"; notification = false; }
       ];
-      keybindings = mkDefault {
+      keybindings = {
         "${cfg.modifier}+Return" = "exec ${cfg.terminal}";
         "${cfg.modifier}+q" = "kill";
         "${cfg.modifier}+space" = "exec ${cfg.menu}";

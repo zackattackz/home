@@ -17,5 +17,9 @@ with lib;
     };
     libinput.enable = true;
     libinput.dev = "/dev/input/event7";
+    light = {
+      enable = true;
+      users = [ "z" ];
+    };
   };
 }

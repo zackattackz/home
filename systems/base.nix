@@ -15,6 +15,7 @@
     (systemModulesPath + /i3-sway)
     (systemModulesPath + /impermanence)
     (systemModulesPath + /libinput)
+    (systemModulesPath + /light)
     (systemModulesPath + /locale)
     (systemModulesPath + /network)
     (systemModulesPath + /nix-ld)
