@@ -10,7 +10,7 @@ in
 {
   options.autorandr.enable = mkEnableOption "autorandr";
   options.autorandr.machine = mkOption {
-    type = types.enum [ "nyx" ];
+    type = types.enum [ "nyx" "athena" ];
   };
   config = mkIf cfg.enable {
     programs.autorandr = {
