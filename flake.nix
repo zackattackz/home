@@ -13,7 +13,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     stylix.url = "github:danth/stylix";
-    impermanence.url = "github:nix-community/impermanence";
+    impermanence.url = "github:zackattackz/impermanence";
   };
 
   outputs = { nixpkgs, home-manager, nixvim, stylix, impermanence, ... }:
