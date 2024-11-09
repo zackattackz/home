@@ -16,7 +16,7 @@ with lib;
       terminal = 10;
     };
     libinput.enable = true;
-    libinput.dev = "/dev/input/event7";
+    services.xserver.exportConfiguration = true;
     light = {
       enable = true;
       users = [ "z" ];
